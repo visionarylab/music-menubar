@@ -10,6 +10,7 @@ import PlayerControls from "../../components/PlayerControls";
 import defaultGif from "../../assets/default.gif";
 
 import "youtube";
+import { string } from "mobx-state-tree/dist/internal";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -31,7 +32,12 @@ export default observer(() => {
   const { lofi } = store.player;
   const { index } = useParams();
   const [player, createPlayer] = useState<YT.Player | undefined>();
+
   const [playing, setPlaying] = useState(false);
+
+  const [current, setCurrent] = useState<
+    { title: string; url: string } | undefined
+  >();
 
   const playlist = lofi.playlists[Number(index)];
 
@@ -59,9 +65,16 @@ export default observer(() => {
     });
   }
 
-  // function onPlayerStateChange(e: any) {
+  function onPlayerStateChange(e: any) {
+    console.log(e.target.playerInfo);
 
-  // }
+    const { videoUrl } = e.target.playerInfo;
+    const { title } = e.target.playerInfo.videoData;
+
+    if (!current || current.title !== title || current.url !== videoUrl) {
+      setCurrent({ title, url: videoUrl });
+    }
+  }
 
   useEffect(() => {
     if (!player) {
@@ -76,7 +89,7 @@ export default observer(() => {
           },
           events: {
             onReady: onPlayerReady,
-            // onStateChange: onPlayerStateChange,
+            onStateChange: onPlayerStateChange,
           },
         })
       );
@@ -85,8 +98,12 @@ export default observer(() => {
     }
   });
 
+  if (player) {
+    console.log(player);
+  }
+
   return (
-    <div className="h-screen">
+    <div className="relative h-screen">
       <Header
         back="/lofi"
         title={playlist.name}
@@ -107,9 +124,14 @@ export default observer(() => {
           />
         </div> */}
       <div id="player" className="hidden" />
-      <div className="">
-        <img className="object-cover w-screen" src={defaultGif} />
-      </div>
+
+      <img className="object-cover w-screen" src={defaultGif} />
+
+      {player && current && (
+        <a className="absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
+          {current.title}
+        </a>
+      )}
 
       {player && (
         <PlayerControls
