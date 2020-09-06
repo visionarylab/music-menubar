@@ -25,7 +25,7 @@ export default function PlayerControls({
 
   return (
     <div>
-      <div className="absolute inset-x-0 bottom-0 border-t-2 border-gray-200 py-2">
+      <div className="absolute inset-x-0 bottom-0 border-t-2 border-gray-200 py-2 bg-white">
         <div className="flex space-x-4 justify-center items-center pb-2">
           <button onClick={onReplay}>
             <svg

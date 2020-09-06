@@ -15,6 +15,7 @@ export default observer(({ open, onClose }: ModalProps) => {
 
   function onSubmit() {
     store.player.lofi.createPlaylist(name, id);
+    onClose();
   }
 
   return (
@@ -34,7 +35,7 @@ export default observer(({ open, onClose }: ModalProps) => {
 
             <input
               className="form-input w-full mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
-              placeholder="Enter your playlist ID here"
+              placeholder="Enter your playlist name here"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -57,13 +58,13 @@ export default observer(({ open, onClose }: ModalProps) => {
         <div className="flex justify-end">
           <button
             onClick={onClose}
-            className="ml-2 shadow-sm relative inline-flex items-center px-4 py-2 border text-base leading-6 rounded-md transition ease-in-out duration-150  border-transparent text-white focus:outline-none  bg-gray-400 hover:bg-gray-500 focus:shadow-outline-gray focus:border-gray-500 active:bg-gray-500"
+            className="ml-2 shadow-sm relative inline-flex items-center px-4 py-2 border text-base leading-6 rounded-md transition ease-in-out duration-150  border-transparent focus:outline-none  bg-gray-300 hover:bg-gray-500 focus:shadow-outline-gray focus:border-gray-500 active:bg-gray-500"
           >
             Close
           </button>
           <button
             onClick={onSubmit}
-            className="ml-2 shadow-sm relative inline-flex items-center px-4 py-2 border text-base leading-6 rounded-md transition ease-in-out duration-150 focus:outline-none border-transparent text-white focus:outline-none  bg-green-600 hover:bg-green-500 focus:shadow-outline-green focus:border-green-700 active:bg-green-700"
+            className="ml-2 shadow-sm relative inline-flex items-center px-4 py-2 border text-base leading-6 rounded-md transition ease-in-out duration-150  border-transparent text-white focus:outline-none  bg-green-600 hover:bg-green-500 focus:shadow-outline-green focus:border-green-700 active:bg-green-700"
           >
             Create
           </button>

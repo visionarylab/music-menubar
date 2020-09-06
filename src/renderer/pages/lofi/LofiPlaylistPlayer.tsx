@@ -5,9 +5,13 @@ import axios from "axios";
 import Header from "../../components/Header";
 import { useParams, useLocation } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
+
+// @ts-ignore ts dumb dumb
+import defaultGif from "../../assets/default.gif";
+
 import "youtube";
 
-const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
+// const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 // hard coding here becuase import 'youtube' wasn't actually loading script
 if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
@@ -82,7 +86,7 @@ export default observer(() => {
   });
 
   return (
-    <div>
+    <div className="h-screen">
       <Header
         back="/lofi"
         title={playlist.name}
@@ -90,8 +94,7 @@ export default observer(() => {
         onEdit={playlist.changeName}
       />
 
-      <div className="rounded-md bg-gray-100 p-6 flex flex-col space-y-5">
-        {/* <div>
+      {/* <div>
           <label className="block text-sm leading-5 font-medium text-gray-700">
             Playlist ID
           </label>
@@ -103,24 +106,26 @@ export default observer(() => {
             onChange={(e) => playlist.setPlaylistId(e.target.value)}
           />
         </div> */}
-        <div id="player" />
-
-        {player && (
-          <PlayerControls
-            playing={playing}
-            onPlay={() => {
-              player.playVideo();
-              setPlaying(true);
-            }}
-            onPause={() => {
-              player.pauseVideo();
-              setPlaying(false);
-            }}
-            onSkip={() => player.nextVideo()}
-            onReplay={() => player.previousVideo()}
-          />
-        )}
+      <div id="player" className="hidden" />
+      <div className="">
+        <img className="object-cover w-screen" src={defaultGif} />
       </div>
+
+      {player && (
+        <PlayerControls
+          playing={playing}
+          onPlay={() => {
+            player.playVideo();
+            setPlaying(true);
+          }}
+          onPause={() => {
+            player.pauseVideo();
+            setPlaying(false);
+          }}
+          onSkip={() => player.nextVideo()}
+          onReplay={() => player.previousVideo()}
+        />
+      )}
     </div>
   );
 });

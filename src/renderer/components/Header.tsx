@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
-function Section({
+function HeaderItem({
   children,
   className,
 }: {
@@ -33,7 +33,7 @@ export default function Header({
 
   return (
     <div className="px-4 app-header overflow-hidden grid grid-cols-6 border-b sticky top-0 z-20 bg-white">
-      <Section className="justify-start col-span-1">
+      <HeaderItem className="justify-start col-span-1">
         {location.pathname === "/" ? (
           <button
             className="rounded-full p-2 outline-none text-gray-200"
@@ -69,8 +69,8 @@ export default function Header({
             </svg>
           </Link>
         )}
-      </Section>
-      <Section className="justify-center col-span-4">
+      </HeaderItem>
+      <HeaderItem className="justify-center col-span-4">
         {editable && onEdit ? (
           <input
             className="outline-none text-center text-2xl font-bold text-gray-900 flex-1"
@@ -83,8 +83,8 @@ export default function Header({
             {title}
           </h1>
         )}
-      </Section>
-      <Section className="justify-end col-span-1">{action}</Section>
+      </HeaderItem>
+      <HeaderItem className="justify-end col-span-1">{action}</HeaderItem>
     </div>
   );
 }

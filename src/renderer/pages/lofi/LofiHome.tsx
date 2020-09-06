@@ -3,6 +3,9 @@ import { observer } from "mobx-react-lite";
 import Header from "../../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
+import Select, { SelectItem } from "../../components/ui/Select";
+import useToggle from "../../components/utils/useToggle";
+import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 // import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 
 function LofiItem({
@@ -66,6 +69,8 @@ function LofiItem({
 // TODO: make dropdown selection for creating either stream or playlist viewer
 export default observer(() => {
   const store = useMst();
+  const [playlistModal, playlistModalActions] = useToggle(false);
+  // const [streamModal, streamModalActions] = useToggle(false)
 
   const { lofi } = store.player;
   const { playlists, streams } = lofi;
@@ -73,12 +78,21 @@ export default observer(() => {
   return (
     <div>
       <Header title="Lofi" />
-      <div className="px-6 py-2 flex justify-between">
-        <h3>Playlists</h3>
-        <button>+</button>
+      <div className="px-6 py-2 flex justify-between items-center">
+        <h3 className="text-xl font-bold text-gray-900">Playlists</h3>
+        <Select label="Create">
+          <SelectItem
+            label="Create Playlist"
+            onClick={playlistModalActions.toggle}
+          />
+          {/* <SelectItem>todo</SelectItem> */}
+        </Select>
       </div>
 
-      {/* <CreatePlaylistModal open={true} onClose={() => {}} /> */}
+      <CreatePlaylistModal
+        open={playlistModal}
+        onClose={playlistModalActions.off}
+      />
 
       <div className="divide-y overflow-y-scroll">
         <ul className="divide-y divide-gray-200">
