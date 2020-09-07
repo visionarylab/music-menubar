@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import hash from "../hash";
 import { authEndpoint, scopes } from "..";
 // import Player from "./Player";
@@ -8,16 +8,23 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 
-// TODO: add global theme (light v dark)
+// THIS IS MESSY
+import lofiJpg from "../assets/lofi-static.jpg";
+import lofiGif from "../assets/lofi.gif";
+import spotifyGif from "../assets/spotify.gif";
+import spotifyJpg from "../assets/spotify.png";
+import spotifyBGJ from "../assets/spotifybg.png";
+import spotifyBGG from "../assets/spotifybg.gif";
+// I DONT LIKE DIRECT IMPORTS
 
+// TODO: add global theme (light v dark)
 export default observer(() => {
   const store = useMst();
 
   const theme = localStorage.getItem("theme");
 
-  // const createProgram = useCallback(() => {
-  //   store.player.createProgram();
-  // }, [store]);
+  const [lofiHovering, setLofiHovering] = useState(false);
+  const [spotifyHovering, setSpotifyHovering] = useState(false);
 
   useEffect(() => {
     // Set token
@@ -79,8 +86,50 @@ export default observer(() => {
           </a>
         </div>
       )} */}
+      <div className="full-minus-header">
+        <div
+          className="h-1/2 relative overflow-hidden bg-black"
+          onMouseEnter={() => setSpotifyHovering(true)}
+          onMouseLeave={() => setSpotifyHovering(false)}
+          // style={{ backgroundImage: `url("${gif}")` }}
+        >
+          {spotifyHovering ? (
+            <img className="object-cover w-full" src={spotifyBGG} />
+          ) : (
+            <img className="object-cover w-full" src={spotifyBGJ} />
+          )}
 
-      <Link to="lofi">go to lofi</Link>
+          <Link
+            to="/spotify"
+            className="absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider"
+          >
+            {spotifyHovering ? (
+              <img className="object-scale-down w-1/2" src={spotifyGif} />
+            ) : (
+              <img className="object-scale-down w-1/2" src={spotifyJpg} />
+            )}
+          </Link>
+        </div>
+        <div
+          className="h-1/2 relative overflow-hidden hoverable-gif"
+          onMouseEnter={() => setLofiHovering(true)}
+          onMouseLeave={() => setLofiHovering(false)}
+          // style={{ backgroundImage: `url("${gif}")` }}
+        >
+          {lofiHovering ? (
+            <img className="object-cover w-full" src={lofiGif} />
+          ) : (
+            <img className="object-cover w-full" src={lofiJpg} />
+          )}
+
+          <Link
+            to="/lofi"
+            className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl text-shadow-lg tracking-wider"
+          >
+            Lofi
+          </Link>
+        </div>
+      </div>
 
       {/* {token && <Player />} */}
     </div>

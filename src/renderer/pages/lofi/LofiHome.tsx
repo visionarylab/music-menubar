@@ -10,6 +10,10 @@ import clsx from "clsx";
 import CreateStreamModal from "../../components/CreateStreamModal";
 // import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 
+const dark = localStorage.getItem("theme")
+  ? localStorage.getItem("theme") === "dark"
+  : false;
+
 function LofiItem({
   to,
   name,
@@ -26,10 +30,17 @@ function LofiItem({
       onClick={() => {
         navigate(to);
       }}
-      className="p-6 flex hover:bg-gray-100 transition-colors duration-150 cursor-pointer"
+      className={clsx(
+        dark ? "bg-dark hover:bg-gray-500" : "hover:bg-gray-100 ",
+        "p-6 flex transition-colors duration-150 cursor-pointer"
+      )}
     >
       <div className="flex-1">
-        <div className="font-bold text-gray-900">{name}</div>
+        <div
+          className={clsx(dark ? "text-white" : "text-gray-900", "font-bold")}
+        >
+          {name}
+        </div>
         {/* <div className="text-gray-600">{description}</div> */}
       </div>
       <div className="flex items-center">
@@ -59,7 +70,7 @@ function LofiItem({
           strokeWidth="2"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="w-6 ml-6"
+          className={clsx(dark && "text-white", "w-6 ml-6")}
         >
           <path d="M9 5l7 7-7 7"></path>
         </svg>
@@ -80,14 +91,28 @@ export default observer(() => {
   const { playlists, streams } = lofi;
 
   return (
-    <div className={clsx(theme && theme === "dark" && "bg-dark")}>
+    <div
+      className={clsx(theme && theme === "dark" && "bg-dark", "min-h-screen")}
+    >
       <Header title="Lofi" dark={theme ? theme === "dark" : false} />
       <div className="px-6 py-2 flex justify-between items-center">
-        <h3 className="text-xl font-bold text-gray-900">Playlists</h3>
+        <h3
+          className={clsx(
+            dark ? "text-white" : "text-gray-900",
+            "text-xl font-bold "
+          )}
+        >
+          Playlists
+        </h3>
 
         <button
           onClick={playlistModalActions.toggle}
-          className="flex justify-between space-x-2 rounded-full border-2 border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+          className={clsx(
+            dark
+              ? "border-white-600 hover:bg-white text-white  hover:text-black"
+              : "border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600  hover:text-white",
+            "flex justify-between space-x-2 rounded-full border-2 transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+          )}
         >
           <svg
             fill="none"
@@ -113,7 +138,12 @@ export default observer(() => {
       <CreateStreamModal open={streamModal} onClose={streamModalActions.off} />
 
       <div className="divide-y overflow-y-scroll">
-        <ul className="divide-y divide-gray-200">
+        <ul
+          className={clsx(
+            dark ? "divide-gray-800" : "divide-gray-200",
+            "divide-y "
+          )}
+        >
           {playlists &&
             playlists.length > 0 &&
             playlists.map((playlist, index) => {
@@ -130,11 +160,23 @@ export default observer(() => {
       </div>
 
       <div className="pt-8 px-6 py-2 flex justify-between items-center">
-        <h3 className="text-xl font-bold text-gray-900">Streams</h3>
+        <h3
+          className={clsx(
+            dark ? "text-white" : "text-gray-900",
+            "text-xl font-bold "
+          )}
+        >
+          Streams
+        </h3>
 
         <button
           onClick={streamModalActions.toggle}
-          className="flex justify-between space-x-2 rounded-full border-2 border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+          className={clsx(
+            dark
+              ? "border-white-600 hover:bg-white text-white  hover:text-black"
+              : "border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600  hover:text-white",
+            "flex justify-between space-x-2 rounded-full border-2 transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+          )}
         >
           <svg
             fill="none"

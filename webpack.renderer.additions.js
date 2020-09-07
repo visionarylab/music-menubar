@@ -3,7 +3,17 @@ module.exports = (config) => {
     if (rule && rule.test && rule.test.test(".css")) {
       rule.use = ["style-loader", "postcss-loader"];
     }
+
+    if (
+      rule &&
+      rule.test &&
+      (rule.test.test(".png") || rule.test.test(".gif"))
+    ) {
+      rule.use = ["file-loader"];
+    }
   });
+
+  console.log(config.module.rules);
 
   // Remove browser aliases so that we always get node.js versions of modules:
   config.resolve.aliasFields = [];

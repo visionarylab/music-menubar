@@ -7,9 +7,10 @@ import { useParams, useLocation } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
 
 // @ts-ignore ts dumb dumb
-import defaultGif from "../../assets/default.gif";
+// import defaultGif from "../../assets/default.gif";
 
 import "youtube";
+import { getRandomGif } from "../../utils";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -30,6 +31,7 @@ export default observer(() => {
   const store = useMst();
   const { lofi } = store.player;
   const { index } = useParams();
+
   const [player, createPlayer] = useState<YT.Player | undefined>();
 
   const [playing, setPlaying] = useState(false);
@@ -37,6 +39,8 @@ export default observer(() => {
   const [current, setCurrent] = useState<
     { title: string; url: string } | undefined
   >();
+
+  const [bg, setBg] = useState(getRandomGif().gif);
 
   const playlist = lofi.playlists[Number(index)];
 
@@ -96,11 +100,11 @@ export default observer(() => {
 
       <img
         className="absolute top-12 object-cover w-screen h-screen"
-        src={defaultGif}
+        src={bg}
       />
 
       {player && current && (
-        <a className="absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
+        <a className="absolute inset-0 flex items-center justify-center text-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
           {current.title}
         </a>
       )}

@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import defaultGif from "../../assets/default.gif";
 import "youtube";
 import PlayerControls from "../../components/PlayerControls";
+import { getRandomGif } from "../../utils";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -32,6 +33,8 @@ export default observer(() => {
   const [current, setCurrent] = useState<
     { title: string; url: string } | undefined
   >();
+
+  const [bg, setBg] = useState(require(getRandomGif().gif));
 
   function onPlayerReady(e: any) {
     // e.target.loadVideo({
@@ -90,7 +93,7 @@ export default observer(() => {
 
       <img
         className="absolute top-12 object-cover w-screen h-screen"
-        src={defaultGif}
+        src={bg}
       />
 
       {player && current && (
