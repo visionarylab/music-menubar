@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
-import axios from "axios";
+// import axios from "axios";
 import Header from "../../components/Header";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
-
-// @ts-ignore ts dumb dumb
-// import defaultGif from "../../assets/default.gif";
-
 import "youtube";
 import { getRandomGif } from "../../utils";
+import Loader from "react-loader-spinner";
+import clsx from "clsx";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -22,6 +21,10 @@ if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
   firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
 }
 
+const dark = localStorage.getItem("theme")
+  ? localStorage.getItem("theme") === "dark"
+  : false;
+
 // TODO: store onExit view function to collect where left off in playlist if not finished
 // TODO: collect any stored info about where left off and initialize player with that on navigate
 // to page
@@ -29,8 +32,10 @@ if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
 
 export default observer(() => {
   const store = useMst();
-  const { lofi } = store.player;
   const { index } = useParams();
+
+  const { lofi, theme } = store.player;
+  const dark = theme === "dark";
 
   const [player, createPlayer] = useState<YT.Player | undefined>();
 
@@ -40,7 +45,7 @@ export default observer(() => {
     { title: string; url: string } | undefined
   >();
 
-  const [bg, setBg] = useState(getRandomGif().gif);
+  const [bg, setBg] = useState<any>();
 
   const playlist = lofi.playlists[Number(index)];
 
@@ -55,10 +60,17 @@ export default observer(() => {
   }
 
   function onPlayerStateChange(e: any) {
-    // console.log(e.target.playerInfo);
-
     const { videoUrl } = e.target.playerInfo;
     const { title } = e.target.playerInfo.videoData;
+
+    const currentlyPlaying = e.target.getPlayerState() === 1;
+
+    if (currentlyPlaying !== playing) {
+      if (!playing && currentlyPlaying) {
+        setBg(getRandomGif().gif);
+      }
+      setPlaying(currentlyPlaying);
+    }
 
     if (!current || current.title !== title || current.url !== videoUrl) {
       setCurrent({ title, url: videoUrl });
@@ -88,22 +100,29 @@ export default observer(() => {
   });
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div
+      className={clsx(dark && "bg-dark", "relative h-screen overflow-hidden")}
+    >
       <Header
         back="/lofi"
         title={playlist.name}
         editable
         onEdit={playlist.changeName}
+        dark
+        clear
       />
 
       <div id="player" className="hidden" />
 
-      <img
-        className="absolute top-12 object-cover w-screen h-screen"
-        src={bg}
-      />
+      <img className="absolute object-cover w-screen h-screen top-0" src={bg} />
 
-      {player && current && (
+      {!bg && (
+        <div className="full-minus-header flex items-center justify-center">
+          <Loader type="Bars" color="#00BFFF" height={80} width={80} />
+        </div>
+      )}
+
+      {player && current && bg && (
         <a className="absolute inset-0 flex items-center justify-center text-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
           {current.title}
         </a>

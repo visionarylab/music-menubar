@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import hash from "../hash";
-import { authEndpoint, scopes } from "..";
+// import { authEndpoint, scopes } from "..";
 // import Player from "./Player";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
@@ -11,6 +11,9 @@ import clsx from "clsx";
 // THIS IS MESSY
 import lofiJpg from "../assets/lofi-static.jpg";
 import lofiGif from "../assets/lofi.gif";
+import lofiTT from "../assets/lofititle.png";
+import lofiTG from "../assets/lofititle.gif";
+
 import spotifyGif from "../assets/spotify.gif";
 import spotifyJpg from "../assets/spotify.png";
 import spotifyBGJ from "../assets/spotifybg.png";
@@ -21,7 +24,7 @@ import spotifyBGG from "../assets/spotifybg.gif";
 export default observer(() => {
   const store = useMst();
 
-  const theme = localStorage.getItem("theme");
+  const { theme } = store.player;
 
   const [lofiHovering, setLofiHovering] = useState(false);
   const [spotifyHovering, setSpotifyHovering] = useState(false);
@@ -30,26 +33,25 @@ export default observer(() => {
     // Set token
     let _token = hash.access_token;
     if (_token) {
-      store.player.setToken(_token);
+      store.player.spotify.setToken(_token);
+      window.location.href = "/spotify";
     }
   });
 
   // const { token } = store.player;
 
   return (
-    <div
-      className={clsx(theme && theme === "dark" && "bg-dark", "min-h-screen")}
-    >
+    <div className={clsx(theme === "dark" && "bg-dark", "min-h-screen")}>
       {/* <h1 className="text-6xl font-bold text-gray-900">menubar boiler!</h1>
       <p>This is a shell to start creating electron based menu applications</p> */}
       <Header
-        dark={theme ? theme === "dark" : false}
+        dark={theme === "dark"}
         title="Welcome"
         action={
           <Link
             to="settings"
             className={clsx(
-              theme && theme === "dark"
+              theme === "dark"
                 ? "text-white hover:bg-gray-700 "
                 : "hover:bg-gray-200 ",
               "rounded-full p-2 focus:outline-none transition-colors duration-150"
@@ -126,7 +128,11 @@ export default observer(() => {
             to="/lofi"
             className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl text-shadow-lg tracking-wider"
           >
-            Lofi
+            {lofiHovering ? (
+              <img className="object-scale-down w-1/2" src={lofiTG} />
+            ) : (
+              <img className="object-scale-down w-1/2" src={lofiTT} />
+            )}
           </Link>
         </div>
       </div>

@@ -13,8 +13,6 @@ module.exports = (config) => {
     }
   });
 
-  console.log(config.module.rules);
-
   // Remove browser aliases so that we always get node.js versions of modules:
   config.resolve.aliasFields = [];
 

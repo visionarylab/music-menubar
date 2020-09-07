@@ -12,36 +12,34 @@ import clsx from "clsx";
 export default observer(() => {
   const store = useMst();
 
-  const { spotify, lofi } = store.player;
+  const { spotify, lofi, theme } = store.player;
 
-  const [theme, setTheme] = useState<string | null>(
-    localStorage.getItem("theme")
-  );
+  // const [theme, setTheme] = useState<string | null>(
+  //   localStorage.getItem("theme")
+  // );
 
   function toggleTheme() {
     if (!theme || theme === "light") {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
+      store.player.setTheme("dark");
     } else {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
+      store.player.setTheme("light");
     }
   }
 
   return (
     <div className={clsx(theme && theme === "dark" && "bg-dark", "h-screen")}>
-      <Header title="Settings" dark={theme ? theme === "dark" : false} />
+      <Header title="Settings" dark={theme === "dark"} />
       <div className="p-6 flex flex-col space-y-5">
         <Toggle
-          enabled={theme ? theme === "dark" : false}
+          enabled={theme === "dark"}
           onToggle={toggleTheme}
           title="Dark Theme"
-          dark={theme ? theme === "dark" : false}
+          dark={theme === "dark"}
         />
         <div>
           <label
             className={clsx(
-              theme && theme === "dark" ? "text-white" : "text-gray-700",
+              theme === "dark" ? "text-white" : "text-gray-700",
               "block text-sm leading-5 font-medium "
             )}
           >
@@ -60,7 +58,7 @@ export default observer(() => {
         <div>
           <label
             className={clsx(
-              theme && theme === "dark" ? "text-white" : "text-gray-700",
+              theme === "dark" ? "text-white" : "text-gray-700",
               "block text-sm leading-5 font-medium "
             )}
           >

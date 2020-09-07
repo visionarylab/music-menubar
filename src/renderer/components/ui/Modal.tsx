@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import useToggle from "../utils/useToggle";
 import { isIOS } from "react-device-detect";
 import FocusTrap from "focus-trap-react";
 import { AnimatePresence, motion } from "framer-motion";

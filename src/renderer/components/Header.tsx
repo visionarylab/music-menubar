@@ -19,6 +19,7 @@ type Props = {
   editable?: boolean;
   onEdit?(e: any): void;
   dark: boolean;
+  clear?: boolean;
 };
 
 export default function Header({
@@ -28,13 +29,16 @@ export default function Header({
   editable,
   onEdit,
   dark,
+  clear,
 }: Props) {
   const location = useLocation();
 
   return (
     <div
       className={clsx(
-        dark ? "bg-darker border-blackish" : "bg-white",
+        clear && "bg-transparent",
+        !clear && dark && "bg-darker border-blackish",
+        !clear && !dark && "bg-white",
         "px-4 app-header overflow-hidden grid grid-cols-6 border-b sticky top-0 z-20"
       )}
     >
@@ -63,7 +67,8 @@ export default function Header({
           <Link
             to={back ? back : ".."}
             className={clsx(
-              dark ? "text-white hover:bg-gray-700" : "hover:bg-gray-200",
+              (clear || dark) && "text-white hover:bg-gray-700",
+              !clear && !dark && "hover:bg-gray-200",
               "rounded-full p-2 focus:outline-none transition-colors duration-150"
             )}
           >
@@ -85,7 +90,9 @@ export default function Header({
         {editable && onEdit ? (
           <input
             className={clsx(
-              dark ? "text-white" : "text-gray-900",
+              clear && dark && "text-white bg-transparent",
+              !clear && dark && "text-white",
+              !clear && !dark && "text-gray-900",
               "outline-none text-center text-2xl font-bold flex-1"
             )}
             value={title}

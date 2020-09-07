@@ -1,27 +1,25 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import Header from "../../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
-import Select, { SelectItem } from "../../components/ui/Select";
+// import Select, { SelectItem } from "../../components/ui/Select";
 import useToggle from "../../components/utils/useToggle";
 import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 import clsx from "clsx";
 import CreateStreamModal from "../../components/CreateStreamModal";
 // import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 
-const dark = localStorage.getItem("theme")
-  ? localStorage.getItem("theme") === "dark"
-  : false;
-
 function LofiItem({
   to,
   name,
   onDelete,
+  dark,
 }: {
   to: string;
   name: string;
   onDelete(): void;
+  dark: boolean;
 }) {
   const navigate = useNavigate();
 
@@ -85,16 +83,15 @@ export default observer(() => {
   const [playlistModal, playlistModalActions] = useToggle(false);
   const [streamModal, streamModalActions] = useToggle(false);
 
-  const theme = localStorage.getItem("theme");
+  const { lofi, theme } = store.player;
 
-  const { lofi } = store.player;
+  const dark = theme === "dark";
+
   const { playlists, streams } = lofi;
 
   return (
-    <div
-      className={clsx(theme && theme === "dark" && "bg-dark", "min-h-screen")}
-    >
-      <Header title="Lofi" dark={theme ? theme === "dark" : false} />
+    <div className={clsx(dark && "bg-dark", "min-h-screen")}>
+      <Header title="Lofi" dark={dark} />
       <div className="px-6 py-2 flex justify-between items-center">
         <h3
           className={clsx(
@@ -153,6 +150,7 @@ export default observer(() => {
                   to={`/lofi/playlist/${index}`}
                   name={playlist.name}
                   onDelete={() => lofi.deletePlaylist(playlist)}
+                  dark={dark}
                 />
               );
             })}
@@ -205,6 +203,7 @@ export default observer(() => {
                   to={`/lofi/stream/${index}`}
                   name={stream.name}
                   onDelete={() => lofi.deleteStream(stream)}
+                  dark={dark}
                 />
               );
             })}

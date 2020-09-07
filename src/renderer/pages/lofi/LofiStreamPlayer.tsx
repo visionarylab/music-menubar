@@ -3,11 +3,9 @@ import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
-// @ts-ignore ts dumb dumb
-import defaultGif from "../../assets/default.gif";
-import "youtube";
 import PlayerControls from "../../components/PlayerControls";
 import { getRandomGif } from "../../utils";
+import "youtube";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -52,6 +50,15 @@ export default observer(() => {
     const { videoUrl } = e.target.playerInfo;
     const { title } = e.target.playerInfo.videoData;
 
+    const currentlyPlaying = e.target.getPlayerState() === 1;
+
+    if (currentlyPlaying !== playing) {
+      if (!playing && currentlyPlaying) {
+        setBg(getRandomGif().gif);
+      }
+      setPlaying(currentlyPlaying);
+    }
+
     if (!current || current.title !== title || current.url !== videoUrl) {
       setCurrent({ title, url: videoUrl });
     }
@@ -87,6 +94,8 @@ export default observer(() => {
         title={stream.name}
         editable
         onEdit={stream.changeName}
+        dark
+        clear
       />
 
       <div id="player" className="hidden" />
