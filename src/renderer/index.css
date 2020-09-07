@@ -36,3 +36,24 @@
 .text-shadow-none {
   text-shadow: none;
 }
+
+.bg-dark {
+  background-color: rgb(45, 48, 55);
+}
+
+.bg-darker {
+  background-color: rgb(39, 41, 47);
+}
+
+.border-blackish {
+  --border-opacity: 1;
+  border-color: rgb(27, 28, 32);
+  border-color: rgba(0, 0, 0, var(--border-opacity));
+}
+
+.bg-dark-accent {
+}
+
+.hoverable:hover {
+  transform: scale(1.1);
+}

@@ -6,11 +6,14 @@ import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 // TODO: add global theme (light v dark)
 
 export default observer(() => {
   const store = useMst();
+
+  const theme = localStorage.getItem("theme");
 
   // const createProgram = useCallback(() => {
   //   store.player.createProgram();
@@ -27,15 +30,23 @@ export default observer(() => {
   // const { token } = store.player;
 
   return (
-    <div className="min-h-screen">
+    <div
+      className={clsx(theme && theme === "dark" && "bg-dark", "min-h-screen")}
+    >
       {/* <h1 className="text-6xl font-bold text-gray-900">menubar boiler!</h1>
       <p>This is a shell to start creating electron based menu applications</p> */}
       <Header
+        dark={theme ? theme === "dark" : false}
         title="Welcome"
         action={
           <Link
             to="settings"
-            className="rounded-full p-2 hover:bg-gray-200 focus:outline-none transition-colors duration-150"
+            className={clsx(
+              theme && theme === "dark"
+                ? "text-white hover:bg-gray-700 "
+                : "hover:bg-gray-200 ",
+              "rounded-full p-2 focus:outline-none transition-colors duration-150"
+            )}
           >
             <svg
               viewBox="0 0 20 20"

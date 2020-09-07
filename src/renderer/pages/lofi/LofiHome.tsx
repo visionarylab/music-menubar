@@ -6,6 +6,8 @@ import { useMst } from "../../models";
 import Select, { SelectItem } from "../../components/ui/Select";
 import useToggle from "../../components/utils/useToggle";
 import CreatePlaylistModal from "../../components/CreatePlaylistModal";
+import clsx from "clsx";
+import CreateStreamModal from "../../components/CreateStreamModal";
 // import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 
 function LofiItem({
@@ -70,29 +72,45 @@ function LofiItem({
 export default observer(() => {
   const store = useMst();
   const [playlistModal, playlistModalActions] = useToggle(false);
-  // const [streamModal, streamModalActions] = useToggle(false)
+  const [streamModal, streamModalActions] = useToggle(false);
+
+  const theme = localStorage.getItem("theme");
 
   const { lofi } = store.player;
   const { playlists, streams } = lofi;
 
   return (
-    <div>
-      <Header title="Lofi" />
+    <div className={clsx(theme && theme === "dark" && "bg-dark")}>
+      <Header title="Lofi" dark={theme ? theme === "dark" : false} />
       <div className="px-6 py-2 flex justify-between items-center">
         <h3 className="text-xl font-bold text-gray-900">Playlists</h3>
-        <Select label="Create">
-          <SelectItem
-            label="Create Playlist"
-            onClick={playlistModalActions.toggle}
-          />
-          {/* <SelectItem>todo</SelectItem> */}
-        </Select>
+
+        <button
+          onClick={playlistModalActions.toggle}
+          className="flex justify-between space-x-2 rounded-full border-2 border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+        >
+          <svg
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="h-4 w-4 font-bold"
+          >
+            <path d="M12 4v16m8-8H4"></path>
+          </svg>
+
+          <p className="text-sm">Create</p>
+        </button>
       </div>
 
       <CreatePlaylistModal
         open={playlistModal}
         onClose={playlistModalActions.off}
       />
+
+      <CreateStreamModal open={streamModal} onClose={streamModalActions.off} />
 
       <div className="divide-y overflow-y-scroll">
         <ul className="divide-y divide-gray-200">
@@ -105,6 +123,46 @@ export default observer(() => {
                   to={`/lofi/playlist/${index}`}
                   name={playlist.name}
                   onDelete={() => lofi.deletePlaylist(playlist)}
+                />
+              );
+            })}
+        </ul>
+      </div>
+
+      <div className="pt-8 px-6 py-2 flex justify-between items-center">
+        <h3 className="text-xl font-bold text-gray-900">Streams</h3>
+
+        <button
+          onClick={streamModalActions.toggle}
+          className="flex justify-between space-x-2 rounded-full border-2 border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white transition-colors focus:outline-none duration-300 text-lg px-2 py-1 items-center font-semibold"
+        >
+          <svg
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="h-4 w-4 font-bold"
+          >
+            <path d="M12 4v16m8-8H4"></path>
+          </svg>
+
+          <p className="text-sm">Create</p>
+        </button>
+      </div>
+
+      <div className="divide-y overflow-y-scroll">
+        <ul className="divide-y divide-gray-200">
+          {streams &&
+            streams.length > 0 &&
+            streams.map((stream, index) => {
+              return (
+                <LofiItem
+                  key={stream.videoId}
+                  to={`/lofi/stream/${index}`}
+                  name={stream.name}
+                  onDelete={() => lofi.deleteStream(stream)}
                 />
               );
             })}

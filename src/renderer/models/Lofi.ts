@@ -47,7 +47,18 @@ export const Lofi = types
         })
       );
     },
+    createStream(name: string, id: string) {
+      self.streams.push(
+        YTStream.create({
+          name,
+          videoId: id,
+        })
+      );
+    },
     deletePlaylist(playlist: any) {
       destroy(playlist);
+    },
+    deleteStream(stream: any) {
+      destroy(stream);
     },
   }));

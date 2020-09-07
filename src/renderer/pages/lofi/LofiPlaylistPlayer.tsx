@@ -10,7 +10,6 @@ import PlayerControls from "../../components/PlayerControls";
 import defaultGif from "../../assets/default.gif";
 
 import "youtube";
-import { string } from "mobx-state-tree/dist/internal";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -41,20 +40,6 @@ export default observer(() => {
 
   const playlist = lofi.playlists[Number(index)];
 
-  // async function get_playlist() {
-  //   if (!playlist) return;
-
-  //   const res = await axios.get(baseURL, {
-  //     params: {
-  //       part: "id",
-  //       playlistId: playlist.playlistId,
-  //       key: lofi.googleApiKey,
-  //     },
-  //   });
-
-  //   console.log(res);
-  // }
-
   function onPlayerReady(e: any) {
     e.target.loadPlaylist({
       list: playlist.playlistId,
@@ -66,7 +51,7 @@ export default observer(() => {
   }
 
   function onPlayerStateChange(e: any) {
-    console.log(e.target.playerInfo);
+    // console.log(e.target.playerInfo);
 
     const { videoUrl } = e.target.playerInfo;
     const { title } = e.target.playerInfo.videoData;
@@ -98,12 +83,8 @@ export default observer(() => {
     }
   });
 
-  if (player) {
-    console.log(player);
-  }
-
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-hidden">
       <Header
         back="/lofi"
         title={playlist.name}
@@ -111,21 +92,12 @@ export default observer(() => {
         onEdit={playlist.changeName}
       />
 
-      {/* <div>
-          <label className="block text-sm leading-5 font-medium text-gray-700">
-            Playlist ID
-          </label>
-
-          <input
-            className="form-input w-full mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
-            placeholder="Enter your playlist ID here"
-            value={playlist.playlistId}
-            onChange={(e) => playlist.setPlaylistId(e.target.value)}
-          />
-        </div> */}
       <div id="player" className="hidden" />
 
-      <img className="object-cover w-screen" src={defaultGif} />
+      <img
+        className="absolute top-12 object-cover w-screen h-screen"
+        src={defaultGif}
+      />
 
       {player && current && (
         <a className="absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">

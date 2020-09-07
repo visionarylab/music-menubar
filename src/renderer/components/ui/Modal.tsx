@@ -83,7 +83,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
     <AnimatePresence>
       {open && (
         <FocusTrap>
-          <div className="z-10 fixed bottom-0 items-center inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
+          <div className="z-30 fixed bottom-0 items-center inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -101,7 +101,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
               exit={modalInitial}
               transition={{ duration: 0.2, ease: "easeOut" }}
               role="dialog"
-              className="relative bg-white rounded-lg overflow-hidden shadow-xl sm:max-w-lg sm:w-full z-10 max-h-full"
+              className="relative bg-white rounded-lg overflow-hidden shadow-xl sm:max-w-lg sm:w-full z-30 max-h-full"
             >
               {children}
             </motion.div>

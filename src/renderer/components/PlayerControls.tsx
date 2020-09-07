@@ -4,8 +4,8 @@ type Controls = {
   playing: boolean;
   onPlay(): void;
   onPause(): void;
-  onSkip(): void;
-  onReplay(): void;
+  onSkip?(): void;
+  onReplay?(): void;
 };
 
 export default function PlayerControls({
@@ -25,24 +25,26 @@ export default function PlayerControls({
 
   return (
     <div>
-      <div className="absolute inset-x-0 bottom-0 border-t-2 border-gray-200 py-2 bg-white">
-        <div className="flex space-x-4 justify-center items-center pb-2">
-          <button onClick={onReplay}>
-            <svg
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="rewind w-12 h-12"
-            >
-              <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
-            </svg>
-          </button>
+      <div className="absolute inset-x-0 bottom-0  py-2 ">
+        <div className="flex space-x-4 justify-center items-center pb-2 text-white text-shadow-lg">
+          {onReplay && (
+            <button onClick={onReplay}>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="rewind w-12 h-12 hoverable"
+              >
+                <path d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z" />
+              </svg>
+            </button>
+          )}
 
           <button onClick={toggle}>
             {playing ? (
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="pause w-12 h-12"
+                className="pause w-12 h-12 hoverable"
               >
                 <path
                   fillRule="evenodd"
@@ -54,7 +56,7 @@ export default function PlayerControls({
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="play w-12 h-12"
+                className="play w-12 h-12 hoverable"
               >
                 <path
                   fillRule="evenodd"
@@ -65,15 +67,17 @@ export default function PlayerControls({
             )}
           </button>
 
-          <button onClick={onSkip}>
-            <svg
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="fast-forward w-12 h-12"
-            >
-              <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
-            </svg>
-          </button>
+          {onSkip && (
+            <button onClick={onSkip}>
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="fast-forward w-12 h-12 hoverable"
+              >
+                <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z" />
+              </svg>
+            </button>
+          )}
         </div>
         {/* <div className="px-6 pb-4">
           <Line percent={percentListened} strokeColor="#4a5568" />

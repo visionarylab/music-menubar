@@ -18,6 +18,7 @@ type Props = {
   action?: React.ReactNode;
   editable?: boolean;
   onEdit?(e: any): void;
+  dark: boolean;
 };
 
 export default function Header({
@@ -26,17 +27,24 @@ export default function Header({
   action,
   editable,
   onEdit,
+  dark,
 }: Props) {
   const location = useLocation();
 
-  console.log(back);
-
   return (
-    <div className="px-4 app-header overflow-hidden grid grid-cols-6 border-b sticky top-0 z-20 bg-white">
+    <div
+      className={clsx(
+        dark ? "bg-darker border-blackish" : "bg-white",
+        "px-4 app-header overflow-hidden grid grid-cols-6 border-b sticky top-0 z-20"
+      )}
+    >
       <HeaderItem className="justify-start col-span-1">
         {location.pathname === "/" ? (
           <button
-            className="rounded-full p-2 outline-none text-gray-200"
+            className={clsx(
+              dark ? "text-gray-600" : "text-gray-200",
+              "rounded-full p-2 outline-none "
+            )}
             disabled
           >
             <svg
@@ -54,7 +62,10 @@ export default function Header({
         ) : (
           <Link
             to={back ? back : ".."}
-            className="rounded-full p-2 hover:bg-gray-200 focus:outline-none transition-colors duration-150"
+            className={clsx(
+              dark ? "text-white hover:bg-gray-700" : "hover:bg-gray-200",
+              "rounded-full p-2 focus:outline-none transition-colors duration-150"
+            )}
           >
             <svg
               fill="none"
@@ -73,13 +84,21 @@ export default function Header({
       <HeaderItem className="justify-center col-span-4">
         {editable && onEdit ? (
           <input
-            className="outline-none text-center text-2xl font-bold text-gray-900 flex-1"
+            className={clsx(
+              dark ? "text-white" : "text-gray-900",
+              "outline-none text-center text-2xl font-bold flex-1"
+            )}
             value={title}
             onChange={(e: any) => onEdit(e.target.value)}
             title="Edit Name"
           />
         ) : (
-          <h1 className="text-center text-2xl font-bold text-gray-900 flex-1">
+          <h1
+            className={clsx(
+              dark ? "text-white" : "text-gray-900",
+              "text-center text-2xl font-bold flex-1"
+            )}
+          >
             {title}
           </h1>
         )}

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import Header from "../components/Header";
 import { useMst } from "../models";
+import Toggle from "../components/ui/Toggle";
+import clsx from "clsx";
 
 // TODO: parse the api key forms into separate small components to be reused in
 // each options own settings screen (i.e. spotify settings vs lofi settings)
@@ -12,12 +14,37 @@ export default observer(() => {
 
   const { spotify, lofi } = store.player;
 
+  const [theme, setTheme] = useState<string | null>(
+    localStorage.getItem("theme")
+  );
+
+  function toggleTheme() {
+    if (!theme || theme === "light") {
+      setTheme("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
   return (
-    <React.Fragment>
-      <Header title="Settings" />
+    <div className={clsx(theme && theme === "dark" && "bg-dark", "h-screen")}>
+      <Header title="Settings" dark={theme ? theme === "dark" : false} />
       <div className="p-6 flex flex-col space-y-5">
+        <Toggle
+          enabled={theme ? theme === "dark" : false}
+          onToggle={toggleTheme}
+          title="Dark Theme"
+          dark={theme ? theme === "dark" : false}
+        />
         <div>
-          <label className="block text-sm leading-5 font-medium text-gray-700">
+          <label
+            className={clsx(
+              theme && theme === "dark" ? "text-white" : "text-gray-700",
+              "block text-sm leading-5 font-medium "
+            )}
+          >
             Spotify Client ID
           </label>
 
@@ -31,7 +58,12 @@ export default observer(() => {
         </div>
 
         <div>
-          <label className="block text-sm leading-5 font-medium text-gray-700">
+          <label
+            className={clsx(
+              theme && theme === "dark" ? "text-white" : "text-gray-700",
+              "block text-sm leading-5 font-medium "
+            )}
+          >
             Google API Key
           </label>
 
@@ -44,6 +76,6 @@ export default observer(() => {
           />
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 });
