@@ -62,6 +62,25 @@ export default observer(() => {
               "block text-sm leading-5 font-medium "
             )}
           >
+            Spotify Client Secret
+          </label>
+
+          <input
+            className="form-input w-full mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
+            type="password"
+            placeholder="Enter your client secret here"
+            value={spotify.clientSecret}
+            onChange={(e) => spotify.setClientSecret(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label
+            className={clsx(
+              theme === "dark" ? "text-white" : "text-gray-700",
+              "block text-sm leading-5 font-medium "
+            )}
+          >
             Google API Key
           </label>
 

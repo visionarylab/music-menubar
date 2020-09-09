@@ -5,8 +5,10 @@ import hash from "../hash";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
+
+import qs from "querystring";
 
 // THIS IS MESSY
 import lofiJpg from "../assets/lofi-static.jpg";
@@ -18,9 +20,9 @@ import spotifyGif from "../assets/spotify.gif";
 import spotifyJpg from "../assets/spotify.png";
 import spotifyBGJ from "../assets/spotifybg.png";
 import spotifyBGG from "../assets/spotifybg.gif";
+import { getTokens } from "../api/spotify";
 // I DONT LIKE DIRECT IMPORTS
 
-// TODO: add global theme (light v dark)
 export default observer(() => {
   const store = useMst();
 
@@ -29,12 +31,32 @@ export default observer(() => {
   const [lofiHovering, setLofiHovering] = useState(false);
   const [spotifyHovering, setSpotifyHovering] = useState(false);
 
+  const navigate = useNavigate();
+
+  async function initSpotify(code: any) {
+    const { data } = await getTokens(
+      btoa(
+        `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
+      ),
+      code,
+      "http://localhost:9080"
+    );
+
+    const { access_token, refresh_token } = data;
+
+    if (access_token && refresh_token) {
+      store.player.spotify.setToken(access_token);
+      store.player.spotify.setRefreshToken(refresh_token);
+    }
+
+    window.location.href = "/";
+  }
+
   useEffect(() => {
-    // Set token
-    let _token = hash.access_token;
-    if (_token) {
-      store.player.spotify.setToken(_token);
-      window.location.href = "/spotify";
+    const code = qs.parse(window.location.search)["?code"];
+
+    if (code) {
+      initSpotify(code);
     }
   });
 

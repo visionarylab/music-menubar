@@ -62,7 +62,7 @@ export default observer(() => {
           )}
           href={`${authEndpoint}?client_id=${spotify.clientId}&redirect_uri=${
             process.env.REDIRECT_URL
-          }&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
+          }&scope=${scopes.join("%20")}&response_type=code&show_dialog=true`}
         >
           Login to Spotify
         </a>

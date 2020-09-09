@@ -12,7 +12,7 @@ let mb: Menubar;
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
 ipcMain.on("notify", () => {
-  mb.tray.setImage(path.resolve(__dirname, "icon.png"));
+  mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
 });
 
 app.on("ready", () => {
@@ -24,7 +24,7 @@ app.on("ready", () => {
           protocol: "file:",
           slashes: true,
         }),
-    icon: path.resolve(__dirname, "icon.png"),
+    icon: path.resolve(__dirname, "cassette.png"),
     tooltip: "menubar",
     browserWindow: {
       //   transparent: true,
@@ -47,7 +47,7 @@ app.on("ready", () => {
   });
 
   mb.on("after-show", () => {
-    mb.tray.setImage(path.resolve(__dirname, "icon.png"));
+    mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
   });
 
   // mb.window?.webContents.on("new-window", function (e, url) {
