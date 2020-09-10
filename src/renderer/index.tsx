@@ -10,6 +10,7 @@ import LofiPlaylistPlayer from "./pages/lofi/LofiPlaylistPlayer";
 import LofiStreamPlayer from "./pages/lofi/LofiStreamPlayer";
 import SpotifyPlayer from "./pages/spotify/SpotifyPlayer";
 import SpotifySettings from "./pages/spotify/SpotifySettings";
+import LofiFavorites from "./pages/lofi/LofiFavorites";
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lofi" element={<LofiHome />} />
+          <Route path="/lofi/favorites" element={<LofiFavorites />} />
           <Route
             path="/lofi/playlist/:index"
             element={<LofiPlaylistPlayer />}

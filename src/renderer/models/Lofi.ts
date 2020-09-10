@@ -25,6 +25,11 @@ export const YTStream = types
     },
   }));
 
+export const Favorite = types.model({
+  name: types.string,
+  link: types.string,
+});
+
 export const Lofi = types
   .model({
     googleApiKey: types.optional(types.string, ""),
@@ -32,8 +37,7 @@ export const Lofi = types
     playlists: types.optional(types.array(YTPlaylist), []),
     streams: types.optional(types.array(YTStream), []),
 
-    // not sure if needed
-    // youtubeToken: types.optional(types.string, ""),
+    favorites: types.optional(types.array(Favorite), []),
   })
   .actions((self) => ({
     setApiKey(value: string) {
@@ -60,5 +64,16 @@ export const Lofi = types
     },
     deleteStream(stream: any) {
       destroy(stream);
+    },
+    addFavorite(name: string, link: string) {
+      self.favorites.push(
+        Favorite.create({
+          name,
+          link,
+        })
+      );
+    },
+    deleteFavorite(favorite: any) {
+      destroy(favorite);
     },
   }));

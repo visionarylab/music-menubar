@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
 // import axios from "axios";
 import Header from "../../components/Header";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
 import "youtube";
 import { getRandomGif } from "../../utils";
@@ -32,6 +32,7 @@ const dark = localStorage.getItem("theme")
 
 export default observer(() => {
   const store = useMst();
+
   const { index } = useParams();
 
   const { lofi, theme } = store.player;
@@ -48,6 +49,30 @@ export default observer(() => {
   const [bg, setBg] = useState<any>();
 
   const playlist = lofi.playlists[Number(index)];
+
+  function checkIsFavorite() {
+    if (!current) return undefined;
+
+    const { favorites } = lofi;
+
+    const existing = favorites.find((favorite) => {
+      return favorite.name === current.title && favorite.link === current.url;
+    });
+
+    return existing;
+  }
+
+  function favoriteSong() {
+    if (!current) return;
+
+    const existing = checkIsFavorite();
+
+    if (!existing) {
+      lofi.addFavorite(current.title, current.url);
+    } else {
+      lofi.deleteFavorite(existing);
+    }
+  }
 
   function onPlayerReady(e: any) {
     e.target.loadPlaylist({
@@ -123,8 +148,24 @@ export default observer(() => {
       )}
 
       {player && current && bg && (
-        <a className="absolute inset-0 flex items-center justify-center text-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
-          {current.title}
+        <a className="absolute inset-0 flex flex-col space-y-4 items-center justify-center text-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
+          <p>{current.title}</p>
+          <span onClick={favoriteSong}>
+            <svg
+              className="w-8 h-8 hoverable"
+              fill={clsx(checkIsFavorite() ? "white" : "none")}
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+              />
+            </svg>
+          </span>
         </a>
       )}
 

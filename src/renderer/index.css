@@ -14,9 +14,9 @@
   /* background-image: url(./assets/lofi-static.jpg); */
 }
 
-.hoverable-gif:hover {
+/* .hoverable-gif:hover {
   transform: scale(1.01);
-}
+} */
 
 .full-minus-header {
   height: calc(100vh - 64px);

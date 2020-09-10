@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
 import { getRandomGif } from "../../utils";
 import "youtube";
+import clsx from "clsx";
+import Loader from "react-loader-spinner";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -19,7 +21,10 @@ if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
 
 export default observer(() => {
   const store = useMst();
-  const { lofi } = store.player;
+
+  const { lofi, theme } = store.player;
+  const dark = theme === "dark";
+
   const { index } = useParams();
 
   const stream = lofi.streams[Number(index)];
@@ -32,7 +37,7 @@ export default observer(() => {
     { title: string; url: string } | undefined
   >();
 
-  const [bg, setBg] = useState(require(getRandomGif().gif));
+  const [bg, setBg] = useState<any>();
 
   function onPlayerReady(e: any) {
     // e.target.loadVideo({
@@ -88,7 +93,9 @@ export default observer(() => {
   });
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div
+      className={clsx(dark && "bg-dark", "relative h-screen overflow-hidden")}
+    >
       <Header
         back="/lofi"
         title={stream.name}
@@ -100,12 +107,15 @@ export default observer(() => {
 
       <div id="player" className="hidden" />
 
-      <img
-        className="absolute top-12 object-cover w-screen h-screen"
-        src={bg}
-      />
+      <img className="absolute object-cover w-screen h-screen top-0" src={bg} />
 
-      {player && current && (
+      {!bg && (
+        <div className="full-minus-header flex items-center justify-center">
+          <Loader type="Bars" color="#00BFFF" height={80} width={80} />
+        </div>
+      )}
+
+      {player && current && bg && (
         <a className="px-2 text-center absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
           {current.title}
         </a>

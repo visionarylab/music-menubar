@@ -13,7 +13,12 @@ export const rootStore = RootModel.create({
           name: "Default Playlist",
           playlistId: "PLuCUpg5b_vRqWMNwIH5oazz_qD170NtI4",
         },
+        {
+          name: "Default Playlist 2",
+          playlistId: "PLOzDu-MXXLliO9fBNZOQTBDddoA3FzZUo",
+        },
       ],
+      streams: [{ name: "ChilledCow", videoId: "5qap5aO4i9A" }],
     },
   },
 });
