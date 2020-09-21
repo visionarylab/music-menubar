@@ -14,7 +14,7 @@ export default observer(({ open, onClose }: ModalProps) => {
   const [id, setId] = useState("");
 
   function onSubmit() {
-    store.player.lofi.createPlaylist(name, id);
+    store.player.youtube.createPlaylist(name, id);
     onClose();
   }
 

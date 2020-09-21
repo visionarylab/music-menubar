@@ -7,15 +7,19 @@ const store = new Store();
 
 export const rootStore = RootModel.create({
   player: {
-    lofi: {
+    youtube: {
       playlists: [
         {
           name: "Default Playlist",
           playlistId: "PLuCUpg5b_vRqWMNwIH5oazz_qD170NtI4",
         },
         {
-          name: "Default Playlist 2",
+          name: "Lofi Hip Hop",
           playlistId: "PLOzDu-MXXLliO9fBNZOQTBDddoA3FzZUo",
+        },
+        {
+          name: "Lofi for Writing",
+          playlistId: "PLSkGho4yZH-Cz7cGg-mY103vl5g-lZSci",
         },
       ],
       streams: [{ name: "ChilledCow", videoId: "5qap5aO4i9A" }],
@@ -23,7 +27,7 @@ export const rootStore = RootModel.create({
   },
 });
 
-const STORAGE_KEY = "MAKE ME PLZ TOOO";
+const STORAGE_KEY = "HEY YOU YEAH YOU MAKE ME PLZ!";
 
 onSnapshot(rootStore, (snapshot) => {
   console.log("Snapshot: ", snapshot);

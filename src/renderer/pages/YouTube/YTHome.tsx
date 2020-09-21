@@ -3,14 +3,13 @@ import { observer } from "mobx-react-lite";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
-// import Select, { SelectItem } from "../../components/ui/Select";
 import useToggle from "../../components/utils/useToggle";
 import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 import clsx from "clsx";
 import CreateStreamModal from "../../components/CreateStreamModal";
 // import CreatePlaylistModal from "../../components/CreatePlaylistModal";
 
-function LofiItem({
+function YTItem({
   to,
   name,
   onDelete,
@@ -86,20 +85,20 @@ export default observer(() => {
   const [playlistModal, playlistModalActions] = useToggle(false);
   const [streamModal, streamModalActions] = useToggle(false);
 
-  const { lofi, theme } = store.player;
+  const { youtube, theme } = store.player;
 
   const dark = theme === "dark";
 
-  const { playlists, streams } = lofi;
+  const { playlists, streams } = youtube;
 
   return (
     <div className={clsx(dark && "bg-dark", "min-h-screen")}>
       <Header
-        title="Lofi"
+        title="YouTube"
         dark={dark}
         action={
           <button
-            onClick={() => navigate("/lofi/favorites")}
+            onClick={() => navigate("/youtube/favorites")}
             className="text-white hover:bg-gray-700 rounded-full p-2 focus:outline-none transition-colors duration-150"
           >
             <svg
@@ -172,11 +171,11 @@ export default observer(() => {
             playlists.length > 0 &&
             playlists.map((playlist, index) => {
               return (
-                <LofiItem
+                <YTItem
                   key={playlist.playlistId}
-                  to={`/lofi/playlist/${index}`}
+                  to={`/youtube/playlist/${index}`}
                   name={playlist.name}
-                  onDelete={() => lofi.deletePlaylist(playlist)}
+                  onDelete={() => youtube.deletePlaylist(playlist)}
                   dark={dark}
                 />
               );
@@ -225,11 +224,11 @@ export default observer(() => {
             streams.length > 0 &&
             streams.map((stream, index) => {
               return (
-                <LofiItem
+                <YTItem
                   key={stream.videoId}
-                  to={`/lofi/stream/${index}`}
+                  to={`/youtube/stream/${index}`}
                   name={stream.name}
-                  onDelete={() => lofi.deleteStream(stream)}
+                  onDelete={() => youtube.deleteStream(stream)}
                   dark={dark}
                 />
               );

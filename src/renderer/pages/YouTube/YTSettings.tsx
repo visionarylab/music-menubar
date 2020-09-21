@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function LofiSettings() {
+export default function YTSettings() {
   return <div></div>;
 }

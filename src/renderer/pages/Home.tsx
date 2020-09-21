@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from "react";
-import hash from "../hash";
-// import { authEndpoint, scopes } from "..";
-// import Player from "./Player";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 
-import qs from "querystring";
+// import qs from "querystring";
 
 // THIS IS MESSY
 import lofiJpg from "../assets/lofi-static.jpg";
 import lofiGif from "../assets/lofi.gif";
-import lofiTT from "../assets/lofititle.png";
-import lofiTG from "../assets/lofititle.gif";
-
-import spotifyGif from "../assets/spotify.gif";
-import spotifyJpg from "../assets/spotify.png";
-import spotifyBGJ from "../assets/spotifybg.png";
-import spotifyBGG from "../assets/spotifybg.gif";
-import { getTokens } from "../api/spotify";
 // I DONT LIKE DIRECT IMPORTS
 
 export default observer(() => {
@@ -28,44 +17,38 @@ export default observer(() => {
 
   const { theme } = store.player;
 
-  const [lofiHovering, setLofiHovering] = useState(false);
-  const [spotifyHovering, setSpotifyHovering] = useState(false);
+  const [hovering, setHovering] = useState(false);
 
-  const navigate = useNavigate();
+  // async function initSpotify(code: any) {
+  //   const { data } = await getTokens(
+  //     btoa(
+  //       `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
+  //     ),
+  //     code,
+  //     "http://localhost:9080"
+  //   );
 
-  async function initSpotify(code: any) {
-    const { data } = await getTokens(
-      btoa(
-        `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
-      ),
-      code,
-      "http://localhost:9080"
-    );
+  //   const { access_token, refresh_token } = data;
 
-    const { access_token, refresh_token } = data;
+  //   if (access_token && refresh_token) {
+  //     store.player.spotify.setToken(access_token);
+  //     store.player.spotify.setRefreshToken(refresh_token);
+  //   }
 
-    if (access_token && refresh_token) {
-      store.player.spotify.setToken(access_token);
-      store.player.spotify.setRefreshToken(refresh_token);
-    }
-
-    window.location.href = "/";
-  }
+  //   window.location.href = "/";
+  // }
 
   useEffect(() => {
-    const code = qs.parse(window.location.search)["?code"];
-
-    if (code) {
-      initSpotify(code);
-    }
+    // const code = qs.parse(window.location.search)["?code"];
+    // if (code) {
+    //   initSpotify(code);
+    // }
   });
 
   // const { token } = store.player;
 
   return (
     <div className={clsx(theme === "dark" && "bg-dark", "min-h-screen")}>
-      {/* <h1 className="text-6xl font-bold text-gray-900">menubar boiler!</h1>
-      <p>This is a shell to start creating electron based menu applications</p> */}
       <Header
         dark={theme === "dark"}
         title="Welcome"
@@ -93,73 +76,76 @@ export default observer(() => {
           </Link>
         }
       />
-      {/* {!token && (
-        <div className="p-6 text-center flex flex-col items-center space-y-6">
-          <h3 className="text-xl font-bold text-gray-900">
-            Welcome to the menubar Spotify applet
-          </h3>
-          <a
-            className="rounded-full border-2 border-green-600 bg-white hover:bg-green-600 text-green-600 hover:text-white transition-colors focus:outline-none duration-300 flex text-lg px-4 py-2 items-center justify-center font-semibold"
-            href={`${authEndpoint}?client_id=${
-              process.env.CLIENT_ID
-            }&redirect_uri=${process.env.REDIRECT_URL}&scope=${scopes.join(
-              "%20"
-            )}&response_type=token&show_dialog=true`}
-          >
-            Login to Spotify
-          </a>
-        </div>
-      )} */}
       <div className="full-minus-header">
         <div
-          className="h-1/2 relative overflow-hidden bg-black"
-          onMouseEnter={() => setSpotifyHovering(true)}
-          onMouseLeave={() => setSpotifyHovering(false)}
+          className="h-full relative overflow-hidden hoverable-gif"
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
           // style={{ backgroundImage: `url("${gif}")` }}
         >
-          {spotifyHovering ? (
-            <img className="object-cover w-full" src={spotifyBGG} />
+          {hovering ? (
+            <img className="object-cover w-full h-full" src={lofiGif} />
           ) : (
-            <img className="object-cover w-full" src={spotifyBGJ} />
+            <img className="object-cover w-full h-full" src={lofiJpg} />
           )}
 
           <Link
-            to="/spotify"
-            className="absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider"
-          >
-            {spotifyHovering ? (
-              <img className="object-scale-down w-1/2" src={spotifyGif} />
-            ) : (
-              <img className="object-scale-down w-1/2" src={spotifyJpg} />
-            )}
-          </Link>
-        </div>
-        <div
-          className="h-1/2 relative overflow-hidden hoverable-gif"
-          onMouseEnter={() => setLofiHovering(true)}
-          onMouseLeave={() => setLofiHovering(false)}
-          // style={{ backgroundImage: `url("${gif}")` }}
-        >
-          {lofiHovering ? (
-            <img className="object-cover w-full" src={lofiGif} />
-          ) : (
-            <img className="object-cover w-full" src={lofiJpg} />
-          )}
-
-          <Link
-            to="/lofi"
+            to="/youtube"
             className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl text-shadow-lg tracking-wider"
           >
-            {lofiHovering ? (
-              <img className="object-scale-down w-1/2" src={lofiTG} />
-            ) : (
-              <img className="object-scale-down w-1/2" src={lofiTT} />
-            )}
+            <div className="relative">
+              <span className="flex h-24 w-24">
+                {hovering && (
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                )}
+
+                <svg
+                  className={clsx(
+                    "relative inline-flex rounded-full w-24 h-24"
+                  )}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </span>
+            </div>
+            {/* <svg
+              className={clsx(hovering && "animate-bounce", "w-24 h-24")}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg> */}
           </Link>
         </div>
       </div>
-
-      {/* {token && <Player />} */}
     </div>
   );
 });

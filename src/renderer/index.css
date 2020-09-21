@@ -10,14 +10,6 @@
   top: 64px;
 }
 
-.hoverable-gif {
-  /* background-image: url(./assets/lofi-static.jpg); */
-}
-
-/* .hoverable-gif:hover {
-  transform: scale(1.01);
-} */
-
 .full-minus-header {
   height: calc(100vh - 64px);
 }
@@ -67,9 +59,6 @@
   --border-opacity: 1;
   border-color: rgb(27, 28, 32);
   border-color: rgba(0, 0, 0, var(--border-opacity));
-}
-
-.bg-dark-accent {
 }
 
 .hoverable:hover {

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
+// import axios from "axios";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
-import { getRandomGif } from "../../utils";
 import "youtube";
-import clsx from "clsx";
+import { getRandomGif } from "../../utils";
 import Loader from "react-loader-spinner";
+import clsx from "clsx";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -19,15 +21,18 @@ if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
   firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
 }
 
+// TODO: store onExit view function to collect where left off in playlist if not finished
+// TODO: collect any stored info about where left off and initialize player with that on navigate
+// to page
+// TODO: hide iframe, load gifs instead
+
 export default observer(() => {
   const store = useMst();
 
-  const { lofi, theme } = store.player;
-  const dark = theme === "dark";
-
   const { index } = useParams();
 
-  const stream = lofi.streams[Number(index)];
+  const { youtube, theme } = store.player;
+  const dark = theme === "dark";
 
   const [player, createPlayer] = useState<YT.Player | undefined>();
 
@@ -39,19 +44,43 @@ export default observer(() => {
 
   const [bg, setBg] = useState<any>();
 
+  const playlist = youtube.playlists[Number(index)];
+
+  function checkIsFavorite() {
+    if (!current) return undefined;
+
+    const { favorites } = youtube;
+
+    const existing = favorites.find((favorite) => {
+      return favorite.name === current.title && favorite.link === current.url;
+    });
+
+    return existing;
+  }
+
+  function favoriteSong() {
+    if (!current) return;
+
+    const existing = checkIsFavorite();
+
+    if (!existing) {
+      youtube.addFavorite(current.title, current.url);
+    } else {
+      youtube.deleteFavorite(existing);
+    }
+  }
+
   function onPlayerReady(e: any) {
-    // e.target.loadVideo({
-    //   list: playlist.playlistId,
-    //   listType: "playlist",
-    //   index: 0,
-    //   startSeconds: 0,
-    //   suggestedQuality: "small",
-    // });
+    e.target.loadPlaylist({
+      list: playlist.playlistId,
+      listType: "playlist",
+      index: 0,
+      startSeconds: 0,
+      suggestedQuality: "small",
+    });
   }
 
   function onPlayerStateChange(e: any) {
-    // console.log(e.target.playerInfo);
-
     const { videoUrl } = e.target.playerInfo;
     const { title } = e.target.playerInfo.videoData;
 
@@ -76,10 +105,8 @@ export default observer(() => {
         new YT.Player("player", {
           height: "300",
           width: "300",
-          videoId: stream.videoId,
           playerVars: {
             controls: "0",
-            autoplay: "1",
           },
           events: {
             onReady: onPlayerReady,
@@ -97,10 +124,10 @@ export default observer(() => {
       className={clsx(dark && "bg-dark", "relative h-screen overflow-hidden")}
     >
       <Header
-        back="/lofi"
-        title={stream.name}
+        back="/youtube"
+        title={playlist.name}
         editable
-        onEdit={stream.changeName}
+        onEdit={playlist.changeName}
         dark
         clear
       />
@@ -116,8 +143,24 @@ export default observer(() => {
       )}
 
       {player && current && bg && (
-        <a className="px-2 text-center absolute inset-0 flex items-center justify-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
-          {current.title}
+        <a className="absolute inset-0 flex flex-col space-y-4 items-center justify-center text-center text-white font-semibold text-2xl text-shadow-lg tracking-wider">
+          <p>{current.title}</p>
+          <span onClick={favoriteSong}>
+            <svg
+              className="w-8 h-8 hoverable"
+              fill={clsx(checkIsFavorite() ? "white" : "none")}
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+              />
+            </svg>
+          </span>
         </a>
       )}
 
@@ -132,6 +175,8 @@ export default observer(() => {
             player.pauseVideo();
             setPlaying(false);
           }}
+          onSkip={() => player.nextVideo()}
+          onReplay={() => player.previousVideo()}
         />
       )}
     </div>

@@ -14,7 +14,7 @@ export default observer(({ open, onClose }: ModalProps) => {
   const [id, setId] = useState("");
 
   function onSubmit() {
-    store.player.lofi.createStream(name, id);
+    store.player.youtube.createStream(name, id);
     onClose();
   }
 
@@ -30,8 +30,8 @@ export default observer(({ open, onClose }: ModalProps) => {
         <div className="flex flex-col space-y-5 pt-2">
           <div>
             <p className="text-sm text-gray-600">
-              This is intended for lofi YouTube streams, however it can be used
-              for any individual video so long as you have the id
+              This is intended for YouTube streams, however it can be used for
+              any individual video so long as you have the id
             </p>
           </div>
           <div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import Header from "../components/Header";
 import { useMst } from "../models";
@@ -6,17 +6,12 @@ import Toggle from "../components/ui/Toggle";
 import clsx from "clsx";
 
 // TODO: parse the api key forms into separate small components to be reused in
-// each options own settings screen (i.e. spotify settings vs lofi settings)
+// each options own settings screen (i.e. spotify settings vs YT settings)
 
-// TODO: add global theme toggle (light v dark)
 export default observer(() => {
   const store = useMst();
 
-  const { spotify, lofi, theme } = store.player;
-
-  // const [theme, setTheme] = useState<string | null>(
-  //   localStorage.getItem("theme")
-  // );
+  const { spotify, youtube, theme } = store.player;
 
   function toggleTheme() {
     if (!theme || theme === "light") {
@@ -88,8 +83,8 @@ export default observer(() => {
             className="form-input w-full mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
             type="password"
             placeholder="Enter your google API key here"
-            value={lofi.googleApiKey}
-            onChange={(e) => lofi.setApiKey(e.target.value)}
+            value={youtube.googleApiKey}
+            onChange={(e) => youtube.setApiKey(e.target.value)}
           />
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { types } from "mobx-state-tree";
 
-// TODO
 export const Spotify = types
   .model({
     clientId: types.optional(types.string, ""),

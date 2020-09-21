@@ -30,7 +30,7 @@ export const Favorite = types.model({
   link: types.string,
 });
 
-export const Lofi = types
+export const YouTube = types
   .model({
     googleApiKey: types.optional(types.string, ""),
 
