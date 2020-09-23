@@ -88,6 +88,7 @@ export default observer(() => {
 
     if (currentlyPlaying !== playing) {
       if (!playing && currentlyPlaying) {
+        // FIXME: pausing triggers BG change
         setBg(getRandomGif().gif);
       }
       setPlaying(currentlyPlaying);

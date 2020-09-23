@@ -18,7 +18,8 @@ ipcMain.on("notify", () => {
 app.on("ready", () => {
   mb = menubar({
     index: is.dev()
-      ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+      ? // ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+        "http://localhost:8080"
       : url.format({
           pathname: path.join(__dirname, "index.html"),
           protocol: "file:",

@@ -18,5 +18,7 @@ module.exports = (config) => {
 
   config.externals = ["react", "react-dom"];
 
+  config.devServer.port = 8080;
+
   return config;
 };
