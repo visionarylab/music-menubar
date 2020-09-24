@@ -6,3 +6,5 @@ dist
 yarn-error.log
 
 config.ts
+
+.DS_STORE
