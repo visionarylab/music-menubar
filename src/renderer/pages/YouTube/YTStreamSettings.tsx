@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import Header from "../../components/Header";
 import { useMst } from "../../models";
 import { useParams } from "react-router-dom";
+// import { useMst } from "../../models";
 
 export default observer(() => {
   const store = useMst();
@@ -10,11 +11,11 @@ export default observer(() => {
 
   const dark = store.player.theme === "dark";
 
-  const playlist = store.player.youtube.playlists[parseInt(index, 10)];
+  const stream = store.player.youtube.streams[parseInt(index, 10)];
 
   return (
     <div>
-      <Header back="/youtube" title={`${playlist.name} Settings`} dark={dark} />
+      <Header back="/youtube" title={`${stream.name} Settings`} dark={dark} />
       TODO
     </div>
   );

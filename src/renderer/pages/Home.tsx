@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
@@ -8,16 +8,54 @@ import clsx from "clsx";
 // import qs from "querystring";
 
 // THIS IS MESSY
-import lofiJpg from "../assets/lofi-static.jpg";
-import lofiGif from "../assets/lofi.gif";
+import lofiJpg from "../assets/homepage/lofi-static.jpg";
+import lofiGif from "../assets/homepage/lofi.gif";
+
+// import spotifyTitleGif from "../assets/homepage/spotify.gif";
+import spotifyPng from "../assets/homepage/spotifybg.png";
+import spotifyGif from "../assets/homepage/spotifybg.gif";
+
+import useToggle from "../components/utils/useToggle";
 // I DONT LIKE DIRECT IMPORTS
+
+function PageLink({
+  bgActive,
+  bg,
+  to,
+  children,
+}: {
+  bgActive: any;
+  bg: any;
+  to: string;
+  children: React.ReactNode;
+}) {
+  const [hovering, { on, off }] = useToggle(false);
+  return (
+    <div
+      className="h-1/3 relative overflow-hidden hoverable-gif"
+      onMouseEnter={on}
+      onMouseLeave={off}
+    >
+      {hovering ? (
+        <img className="object-cover w-full h-full" src={bgActive} />
+      ) : (
+        <img className="object-cover w-full h-full" src={bg} />
+      )}
+
+      <Link
+        to={to}
+        className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl text-shadow-lg tracking-wider"
+      >
+        <div className="relative">{children}</div>
+      </Link>
+    </div>
+  );
+}
 
 export default observer(() => {
   const store = useMst();
 
   const { theme } = store.player;
-
-  const [hovering, setHovering] = useState(false);
 
   // async function initSpotify(code: any) {
   //   const { data } = await getTokens(
@@ -77,54 +115,37 @@ export default observer(() => {
         }
       />
       <div className="full-minus-header">
-        <div
-          className="h-full relative overflow-hidden hoverable-gif"
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          // style={{ backgroundImage: `url("${gif}")` }}
-        >
-          {hovering ? (
-            <img className="object-cover w-full h-full" src={lofiGif} />
-          ) : (
-            <img className="object-cover w-full h-full" src={lofiJpg} />
-          )}
+        <PageLink to="" bg={spotifyPng} bgActive={spotifyGif}>
+          {/* <img className="object-cover w-1/2 mx-auto" src={spotifyTitleGif} /> */}
+          TODO: spotify
+        </PageLink>
 
-          <Link
-            to="/youtube"
-            className="absolute inset-0 flex items-center justify-center text-white font-semibold text-4xl text-shadow-lg tracking-wider"
+        <PageLink to="" bg={lofiJpg} bgActive={lofiGif}>
+          TODO: soundcloud
+        </PageLink>
+
+        <PageLink to="/youtube" bg={lofiJpg} bgActive={lofiGif}>
+          <svg
+            className="relative inline-flex rounded-full w-24 h-24"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <div className="relative">
-              <span className="flex h-24 w-24">
-                {hovering && (
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                )}
-
-                <svg
-                  className={clsx(
-                    "relative inline-flex rounded-full w-24 h-24"
-                  )}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </Link>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </PageLink>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { types, destroy } from "mobx-state-tree";
+import { types, destroy, detach } from "mobx-state-tree";
 
 export const YTPlaylist = types
   .model({
@@ -75,5 +75,15 @@ export const YouTube = types
     },
     deleteFavorite(favorite: any) {
       destroy(favorite);
+    },
+    reorderPLaylists(sourceIndex: number, destIndex: number) {
+      const playlist = self.playlists[sourceIndex];
+      detach(playlist);
+      self.playlists.splice(destIndex, 0, playlist);
+    },
+    reorderStreams(sourceIndex: number, destIndex: number) {
+      const stream = self.streams[sourceIndex];
+      detach(stream);
+      self.streams.splice(destIndex, 0, stream);
     },
   }));

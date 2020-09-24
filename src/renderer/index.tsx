@@ -10,6 +10,8 @@ import YTPlaylistPlayer from "./pages/YouTube/YTPlaylistPlayer";
 import YTStreamPlayer from "./pages/YouTube/YTStreamPlayer";
 import YTFavorites from "./pages/YouTube/YTFavorites";
 import ToastManager from "./components/ToastManager";
+import YTPlaylistSettings from "./pages/YouTube/YTPlaylistSettings";
+import YTStreamSettings from "./pages/YouTube/YTStreamSettings";
 // import qs from "querystring";
 
 // let re = ".*?";
@@ -35,10 +37,21 @@ function App() {
             <Route path="/youtube" element={<YTHome />} />
             <Route path="/youtube/favorites" element={<YTFavorites />} />
             <Route
-              path="/youtube/playlist/:index"
+              path="/youtube/playlist/play/:index"
               element={<YTPlaylistPlayer />}
             />
-            <Route path="/youtube/stream/:index" element={<YTStreamPlayer />} />
+            <Route
+              path="/youtube/playlist/settings/:index"
+              element={<YTPlaylistSettings />}
+            />
+            <Route
+              path="/youtube/stream/play/:index"
+              element={<YTStreamPlayer />}
+            />
+            <Route
+              path="/youtube/stream/settings/:index"
+              element={<YTStreamSettings />}
+            />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </MemoryRouter>
