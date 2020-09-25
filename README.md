@@ -4,7 +4,7 @@ tldr; a dropdown media controller for your youtube playlists / videos (and event
 
 ### More deets
 
-I'm always trying to create things to help improve my workflow, always trying to cut down on the time it takes me to do something that isn't part of my work (i.e. controlling my music). This app may only may be a small improvement, but simply clicking the dropdown to control my music is more than enough for me.
+I'm always trying to create things to help improve my workflow, always trying to cut down on the time it takes me to do something that isn't part of my work (i.e. controlling my music). This app may only be a small improvement, but simply clicking the dropdown to control my music is more than enough for me.
 
 ### Current state
 
@@ -42,3 +42,6 @@ For example:
     source: "https://giphy.com/gifs/cinemagraph-RkDZq0dhhYHhxdFrJB",
 }
 ```
+
+#### Contributing
+I've started creating and annotating issues specifically for the start of Hacktober. Please allow issues marked as "good first issue" to be completed by those with less experience, as I intentionally set these aside. Additionally, please refer to the [CONTRIBUTING.md](https://github.com/aaronleopold/music-menubar/blob/main/CONTRIBUTING.md) for more general information.
