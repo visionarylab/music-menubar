@@ -115,12 +115,12 @@ export default observer(() => {
         }
       />
       <div className="full-minus-header">
-        <PageLink to="" bg={spotifyPng} bgActive={spotifyGif}>
+        <PageLink to="spotify" bg={spotifyPng} bgActive={spotifyGif}>
           {/* <img className="object-cover w-1/2 mx-auto" src={spotifyTitleGif} /> */}
           TODO: spotify
         </PageLink>
 
-        <PageLink to="" bg={lofiJpg} bgActive={lofiGif}>
+        <PageLink to="soundcloud" bg={lofiJpg} bgActive={lofiGif}>
           TODO: soundcloud
         </PageLink>
 

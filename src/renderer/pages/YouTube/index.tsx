@@ -1,13 +1,17 @@
 import React from "react";
-import { observer } from "mobx-react-lite";
 import Header from "../../components/Header";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
 import clsx from "clsx";
 import Playlists from "../../components/YT/Playlists";
 import Streams from "../../components/YT/Streams";
+import YTPlaylistPlayer from "./YTPlaylistPlayer";
+import YTPlaylistSettings from "./YTPlaylistSettings";
+import YTStreamPlayer from "./YTStreamPlayer";
+import YTStreamSettings from "./YTStreamSettings";
+import YTFavorites from "./YTFavorites";
 
-export default observer(() => {
+function Home() {
   const store = useMst();
 
   const navigate = useNavigate();
@@ -21,7 +25,7 @@ export default observer(() => {
         dark={dark}
         action={
           <button
-            onClick={() => navigate("/youtube/favorites")}
+            onClick={() => navigate("favorites")}
             className="text-white hover:bg-gray-700 rounded-full p-2 focus:outline-none transition-colors duration-150"
           >
             <svg
@@ -45,4 +49,17 @@ export default observer(() => {
       <Streams />
     </div>
   );
-});
+}
+
+export default function () {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="favorites" element={<YTFavorites />} />
+      <Route path="playlist/play/:index" element={<YTPlaylistPlayer />} />
+      <Route path="playlist/settings/:index" element={<YTPlaylistSettings />} />
+      <Route path="stream/play/:index" element={<YTStreamPlayer />} />
+      <Route path="stream/settings/:index" element={<YTStreamSettings />} />
+    </Routes>
+  );
+}

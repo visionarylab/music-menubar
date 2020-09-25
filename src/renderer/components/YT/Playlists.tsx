@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
 import { YTPlaylist } from "../../models/YouTube";
-import CreatePlaylistModal from "../CreatePlaylistModal";
+import CreatePlaylistModal from "./CreatePlaylistModal";
 import useToggle from "../utils/useToggle";
 import ListHeader from "./ListHeader";
 
@@ -143,8 +143,8 @@ const DroppableList = observer(
                   {...provided.dragHandleProps}
                 >
                   <PlaylistItem
-                    to={`/youtube/playlist/play/${index}`}
-                    toEdit={`/youtube/playlist/settings/${index}`}
+                    to={`playlist/play/${index}`}
+                    toEdit={`playlist/settings/${index}`}
                     key={index}
                     name={playlist.name}
                     onDelete={() => onDelete(playlist)}

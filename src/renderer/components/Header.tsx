@@ -22,6 +22,10 @@ type Props = {
   clear?: boolean;
 };
 
+// TODO: remove the editable prop and corresponding input
+// it is not very intuitive design, and there will be a settings
+// page for each item so it is rather uneccessary now anyways
+
 export default function Header({
   back,
   title,

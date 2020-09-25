@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useMst } from "../../models";
 import { YTStream } from "../../models/YouTube";
-import CreateStreamModal from "../CreateStreamModal";
+import CreateStreamModal from "./CreateStreamModal";
 import useToggle from "../utils/useToggle";
 import ListHeader from "./ListHeader";
 
@@ -143,8 +143,8 @@ const DroppableList = observer(
                   {...provided.dragHandleProps}
                 >
                   <Stream
-                    to={`/youtube/stream/play/${index}`}
-                    toEdit={`/youtube/stream/settings/${index}`}
+                    to={`stream/play/${index}`}
+                    toEdit={`stream/settings/${index}`}
                     key={index}
                     name={stream.name}
                     onDelete={() => onDelete(stream)}

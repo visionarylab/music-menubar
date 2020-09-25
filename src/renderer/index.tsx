@@ -5,13 +5,11 @@ import { MemoryRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { Provider } from "./models";
 import Settings from "./pages/Settings";
-import YTHome from "./pages/YouTube/YTHome";
-import YTPlaylistPlayer from "./pages/YouTube/YTPlaylistPlayer";
-import YTStreamPlayer from "./pages/YouTube/YTStreamPlayer";
-import YTFavorites from "./pages/YouTube/YTFavorites";
 import ToastManager from "./components/ToastManager";
-import YTPlaylistSettings from "./pages/YouTube/YTPlaylistSettings";
-import YTStreamSettings from "./pages/YouTube/YTStreamSettings";
+import YouTube from "./pages/YouTube";
+import Spotify from "./pages/Spotify";
+import SoundCloud from "./pages/SoundCloud";
+
 // import qs from "querystring";
 
 // let re = ".*?";
@@ -34,24 +32,9 @@ function App() {
         <MemoryRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/youtube" element={<YTHome />} />
-            <Route path="/youtube/favorites" element={<YTFavorites />} />
-            <Route
-              path="/youtube/playlist/play/:index"
-              element={<YTPlaylistPlayer />}
-            />
-            <Route
-              path="/youtube/playlist/settings/:index"
-              element={<YTPlaylistSettings />}
-            />
-            <Route
-              path="/youtube/stream/play/:index"
-              element={<YTStreamPlayer />}
-            />
-            <Route
-              path="/youtube/stream/settings/:index"
-              element={<YTStreamSettings />}
-            />
+            <Route path="/youtube/*" element={<YouTube />} />
+            <Route path="/spotify/*" element={<Spotify />} />
+            <Route path="/soundcloud/*" element={<SoundCloud />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </MemoryRouter>
