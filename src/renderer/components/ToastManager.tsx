@@ -9,7 +9,7 @@ type ToastProps = { onDelete(): void } & Bread;
 function Toast({ title, onDelete }: ToastProps) {
   return (
     <motion.div
-      className="w-screen max-w-md"
+      className="w-screen max-w-md z-50"
       initial={{ translateX: "100%" }}
       animate={{ translateX: 0 }}
       exit={{ translateX: "100%" }}

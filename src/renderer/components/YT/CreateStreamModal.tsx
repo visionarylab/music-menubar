@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal, { ModalContent, ModalFooter } from "../ui/Modal";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
+import { parseUrl } from "../../utils";
 
 type ModalProps = {
   open: boolean;
@@ -12,6 +13,20 @@ export default observer(({ open, onClose }: ModalProps) => {
   const store = useMst();
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [url, setUrl] = useState("");
+
+  const [error, setError] = useState("");
+
+  function onParseUrl() {
+    const params = parseUrl(url);
+
+    if (params && params.v && typeof params.v === "string") {
+      setId(params.v);
+    } else {
+      // toast notify cannot parse params
+      setError("Could not parse URL");
+    }
+  }
 
   function onSubmit() {
     store.player.youtube.createStream(name, id);
@@ -57,6 +72,50 @@ export default observer(({ open, onClose }: ModalProps) => {
               value={id}
               onChange={(e) => setId(e.target.value)}
             />
+          </div>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm leading-5">
+              <span className="px-2 bg-white text-gray-500">Or</span>
+            </div>
+          </div>
+
+          <p className="text-sm text-gray-600">
+            Paste the URL below and see if we can extract the info for you!
+          </p>
+
+          <div>
+            <label className="block text-sm leading-5 font-medium text-gray-700">
+              Video URL
+            </label>
+
+            <div className="flex space-x-2">
+              <input
+                className="form-input flex-1 mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
+                placeholder="Enter your video URL here"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+
+              <button
+                className="px-3 bg-gray-200 rounded-md"
+                onClick={onParseUrl}
+              >
+                parse
+              </button>
+            </div>
+
+            {error && (
+              <p
+                onClick={() => setError("")}
+                className="text-red-500 text-sm leading-5 cursor-pointer pt-1 ml-1"
+              >
+                {error}
+              </p>
+            )}
           </div>
         </div>
       </ModalContent>

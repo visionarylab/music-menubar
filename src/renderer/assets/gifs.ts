@@ -1,5 +1,4 @@
 import waneela from "./gifs/waneela.gif";
-import tokyonight from "./gifs/tokyonight.gif";
 import animecup from "./gifs/animecup.gif";
 import rainyfuture from "./gifs/rainyfuture.gif";
 import japanpixels from "./gifs/japanpixels.gif";
@@ -8,15 +7,12 @@ import lifeinjapan from "./gifs/lifeinjapan.gif";
 import waiting from "./gifs/waiting.gif";
 import stay from "./gifs/stay.gif";
 import dreamhome from "./gifs/dreamhome.gif";
+import streetsofrage from "./gifs/streetsofrage.gif";
 
 export const gifs = [
   {
     gif: waneela,
     source: "https://giphy.com/gifs/cinemagraph-RkDZq0dhhYHhxdFrJB",
-  },
-  {
-    gif: tokyonight,
-    source: "https://giphy.com/gifs/2eKfFHjb30D9tDdJ59",
   },
   {
     gif: animecup,
@@ -50,5 +46,9 @@ export const gifs = [
   {
     gif: dreamhome,
     source: "https://pixeljeff.tumblr.com/image/616630390715760640",
+  },
+  {
+    gif: streetsofrage,
+    source: "https://giphy.com/gifs/streets-of-rage-CN9sOyaRT7YVG",
   },
 ];

@@ -48,7 +48,7 @@ export function PlaylistItem({ to, name, onDelete, toEdit, dark }: ListItem) {
       </div>
       <div className="flex items-center">
         {hovering && (
-          <motion.div>
+          <React.Fragment>
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -92,7 +92,7 @@ export function PlaylistItem({ to, name, onDelete, toEdit, dark }: ListItem) {
                 />
               </svg>
             </button>
-          </motion.div>
+          </React.Fragment>
         )}
 
         <svg
