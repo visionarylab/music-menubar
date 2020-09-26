@@ -23,6 +23,9 @@ export const YTStream = types
     changeName(value: string) {
       self.name = value;
     },
+    setVideoId(value: string) {
+      self.videoId = value;
+    },
   }));
 
 export const Favorite = types.model({

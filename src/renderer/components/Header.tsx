@@ -16,25 +16,11 @@ type Props = {
   back?: string;
   title: string;
   action?: React.ReactNode;
-  editable?: boolean;
-  onEdit?(e: any): void;
   dark: boolean;
   clear?: boolean;
 };
 
-// TODO: remove the editable prop and corresponding input
-// it is not very intuitive design, and there will be a settings
-// page for each item so it is rather uneccessary now anyways
-
-export default function Header({
-  back,
-  title,
-  action,
-  editable,
-  onEdit,
-  dark,
-  clear,
-}: Props) {
+export default function Header({ back, title, action, dark, clear }: Props) {
   const location = useLocation();
 
   return (
@@ -91,28 +77,14 @@ export default function Header({
         )}
       </HeaderItem>
       <HeaderItem className="justify-center col-span-4">
-        {editable && onEdit ? (
-          <input
-            className={clsx(
-              clear && dark && "text-white bg-transparent",
-              !clear && dark && "text-white",
-              !clear && !dark && "text-gray-900",
-              "outline-none text-center text-2xl font-bold flex-1"
-            )}
-            value={title}
-            onChange={(e: any) => onEdit(e.target.value)}
-            title="Edit Name"
-          />
-        ) : (
-          <h1
-            className={clsx(
-              dark ? "text-white" : "text-gray-900",
-              "text-center text-2xl font-bold flex-1"
-            )}
-          >
-            {title}
-          </h1>
-        )}
+        <h1
+          className={clsx(
+            dark ? "text-white" : "text-gray-900",
+            "text-center text-2xl font-bold flex-1"
+          )}
+        >
+          {title}
+        </h1>
       </HeaderItem>
       <HeaderItem className="justify-end col-span-1">{action}</HeaderItem>
     </div>

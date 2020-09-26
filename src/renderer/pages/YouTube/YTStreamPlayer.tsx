@@ -96,14 +96,7 @@ export default observer(() => {
     <div
       className={clsx(dark && "bg-dark", "relative h-screen overflow-hidden")}
     >
-      <Header
-        back="/youtube"
-        title={stream.name}
-        editable
-        onEdit={stream.changeName}
-        dark
-        clear
-      />
+      <Header back="/youtube" title={stream.name} dark clear />
 
       <div id="player" className="hidden" />
 

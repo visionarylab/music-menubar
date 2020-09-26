@@ -5,42 +5,26 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 
-// import qs from "querystring";
-
 // THIS IS MESSY
-import lofiJpg from "../assets/homepage/lofi-static.jpg";
-import lofiGif from "../assets/homepage/lofi.gif";
+import ytGif from "../assets/homepage/mastermind.gif";
 
-// import spotifyTitleGif from "../assets/homepage/spotify.gif";
-import spotifyPng from "../assets/homepage/spotifybg.png";
-import spotifyGif from "../assets/homepage/spotifybg.gif";
+import spotifyGif from "../assets/homepage/yt.gif";
 
-import useToggle from "../components/utils/useToggle";
+import soundCloudGif from "../assets/homepage/nightshift.gif";
 // I DONT LIKE DIRECT IMPORTS
 
 function PageLink({
-  bgActive,
   bg,
   to,
   children,
 }: {
-  bgActive: any;
   bg: any;
   to: string;
   children: React.ReactNode;
 }) {
-  const [hovering, { on, off }] = useToggle(false);
   return (
-    <div
-      className="h-1/3 relative overflow-hidden hoverable-gif"
-      onMouseEnter={on}
-      onMouseLeave={off}
-    >
-      {hovering ? (
-        <img className="object-cover w-full h-full" src={bgActive} />
-      ) : (
-        <img className="object-cover w-full h-full" src={bg} />
-      )}
+    <div className="h-1/3 relative overflow-hidden">
+      <img className="object-cover w-full h-full" src={bg} />
 
       <Link
         to={to}
@@ -115,16 +99,16 @@ export default observer(() => {
         }
       />
       <div className="full-minus-header">
-        <PageLink to="spotify" bg={spotifyPng} bgActive={spotifyGif}>
+        <PageLink to="spotify" bg={spotifyGif}>
           {/* <img className="object-cover w-1/2 mx-auto" src={spotifyTitleGif} /> */}
           TODO: spotify
         </PageLink>
 
-        <PageLink to="soundcloud" bg={lofiJpg} bgActive={lofiGif}>
+        <PageLink to="soundcloud" bg={soundCloudGif}>
           TODO: soundcloud
         </PageLink>
 
-        <PageLink to="/youtube" bg={lofiJpg} bgActive={lofiGif}>
+        <PageLink to="/youtube" bg={ytGif}>
           <svg
             className="relative inline-flex rounded-full w-24 h-24"
             fill="none"

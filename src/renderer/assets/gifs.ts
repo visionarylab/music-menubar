@@ -5,6 +5,9 @@ import rainyfuture from "./gifs/rainyfuture.gif";
 import japanpixels from "./gifs/japanpixels.gif";
 import townatnight from "./gifs/townatnight.gif";
 import lifeinjapan from "./gifs/lifeinjapan.gif";
+import waiting from "./gifs/waiting.gif";
+import stay from "./gifs/stay.gif";
+import dreamhome from "./gifs/dreamhome.gif";
 
 export const gifs = [
   {
@@ -34,5 +37,18 @@ export const gifs = [
   {
     gif: lifeinjapan,
     source: "https://giphy.com/gifs/life-eyes-feast-MHboUUIoxzOKs",
+  },
+  {
+    gif: waiting,
+    source:
+      "https://66.media.tumblr.com/43ff1ae84968ffd84606207e9995a78e/tumblr_py4mvbGe6h1tgo74ho1_1280.gif",
+  },
+  {
+    gif: stay,
+    source: "https://pixeljeff.tumblr.com/image/615862632485928960",
+  },
+  {
+    gif: dreamhome,
+    source: "https://pixeljeff.tumblr.com/image/616630390715760640",
   },
 ];

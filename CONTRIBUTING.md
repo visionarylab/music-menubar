@@ -3,6 +3,8 @@
 When contributing to this repository, please first discuss the change you wish to make via issue,
 email, or any other method with the owners of this repository before making a change.
 
+Ensure you properly document any changes made, including annotations similar to the [JSDoc standard](https://jsdoc.app/tags-param.html#overview) for any non JSX functions. This is a TypeScript project, so please type your contributions accordingly.
+
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Pull Request Process
