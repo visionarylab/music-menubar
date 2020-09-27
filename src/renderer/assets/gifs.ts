@@ -9,7 +9,12 @@ import stay from "./gifs/stay.gif";
 import dreamhome from "./gifs/dreamhome.gif";
 import streetsofrage from "./gifs/streetsofrage.gif";
 
-export const gifs = [
+export type Gif = {
+  gif: any;
+  source: string;
+};
+
+export const gifs: Gif[] = [
   {
     gif: waneela,
     source: "https://giphy.com/gifs/cinemagraph-RkDZq0dhhYHhxdFrJB",

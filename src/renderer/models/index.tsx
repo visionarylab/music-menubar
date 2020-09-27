@@ -40,6 +40,7 @@ const STORAGE_KEY =
 
 onSnapshot(rootStore, (snapshot) => {
   console.log("Snapshot: ", snapshot);
+  store.set(STORAGE_KEY, snapshot);
   console.log("Snapshot persisted to storage.");
 });
 

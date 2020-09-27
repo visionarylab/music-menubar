@@ -8,6 +8,7 @@ import PlayerControls from "../../components/PlayerControls";
 import { getRandomGif } from "../../utils";
 import Loader from "react-loader-spinner";
 import clsx from "clsx";
+import { Gif } from "../../assets/gifs";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -41,7 +42,7 @@ export default observer(() => {
   >();
   const currentRef = useRef(current);
 
-  const [bg, setBg] = useState<any>();
+  const [bg, setBg] = useState<Gif>();
 
   const playlist = youtube.playlists[Number(index)];
 
@@ -98,7 +99,7 @@ export default observer(() => {
     ) {
       // console.log(currentRef.current, title, videoUrl);
       setCurrent({ title, videoUrl, videoId: video_id });
-      setBg(getRandomGif().gif);
+      setBg(getRandomGif());
     }
   }
 
@@ -153,12 +154,23 @@ export default observer(() => {
 
       <div id="player" className="hidden" />
 
-      <img className="absolute object-cover w-screen h-screen top-0" src={bg} />
-
-      {!bg && (
+      {!bg ? (
         <div className="full-minus-header flex items-center justify-center">
           <Loader type="Bars" color="#00BFFF" height={80} width={80} />
         </div>
+      ) : (
+        <React.Fragment>
+          <div className="absolute right-0 m-2 text-white z-10 text-sm">
+            <a href={bg.source} target="_blank" rel="noopener">
+              Like this gif?
+            </a>
+          </div>
+
+          <img
+            className="absolute object-cover w-screen h-screen top-0"
+            src={bg.gif}
+          />
+        </React.Fragment>
       )}
 
       {player && current && bg && (

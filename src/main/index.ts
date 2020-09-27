@@ -4,6 +4,7 @@ import { app, ipcMain } from "electron";
 import is from "electron-is";
 import { menubar, Menubar } from "menubar";
 import { autoUpdater } from "electron-updater";
+import open from "open";
 
 autoUpdater.checkForUpdatesAndNotify();
 
@@ -50,12 +51,18 @@ app.on("ready", () => {
   mb.on("after-show", () => {
     mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
   });
-
-  // mb.window?.webContents.on("new-window", function (e, url) {
-  //   e.preventDefault();
-  //   require("electron").shell.openExternal(url);
-  // });
 });
+
+// reroute new windows to default browser
+function createOpenHandler(_: Electron.Event, contents: Electron.webContents) {
+  const anyContents = contents as any;
+  anyContents.on("new-window", (e: Electron.NewWindowEvent, url: string) => {
+    e.preventDefault();
+    open(url);
+  });
+}
+
+app.on("web-contents-created", createOpenHandler);
 
 app.on("window-all-closed", (event: Event) => {
   app.dock.hide();

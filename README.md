@@ -10,11 +10,11 @@ A quick note, I will be using the term 'stream' throughout this readme when refe
 
 ### Current state
 
-Currently this media player is only capable of managing youtube playlists and streams. I originally had spotify partly working, but decided to only focus on one feature at a time. So, until the youtube portion is closer to where I want it to be I'll be shelving the spotify controls.
+Currently this media player is only capable of managing existing youtube playlists and streams. I originally had a spotify controller partly working, but decided to focus on one feature at a time. So, until the youtube portion is closer to where I want it to be I'll be shelving the spotify controls.
 
 ### Installation
 
-Until a release, you can follow the development startup as follows:
+Until a release has been made, you can follow the development startup procedure as follows:
 
 ```bash
 git clone https://github.com/aaronleopold/music-menubar.git
@@ -25,15 +25,17 @@ yarn dev
 
 ### Usage
 
-Off the bat, this will come preloaded with three playlists and one stream. All of the preloaded configs are Lofi, so if that's not your thing you can just delete them. To create new playlists, all that is required is pasting an appropriate link and assigning the item a name.
+Off the bat, this will come preloaded with three playlists and one stream. All of the preloaded items are Lofi, so if that's not your thing you can just delete them. To link new items, all that is required is pasting an appropriate link and assigning a name.
 
-In the event that the parsing fails, you'll need to grab the ID from the url manually. For example, let's say you wanted to add the following playlist:
+In the event that the URL parsing fails, you'll need to grab the ID from the URL manually. For playlists, this is the value that comes immediately after `?list=`, and for videos / streams this is the value that comes immediately after `?v=`.
+
+For example, let's say you wanted to add the following playlist:
 
 `https://www.youtube.com/playlist?list=PLm5pKYShxnXB1g2LixFdKxjAvl3P2O4Hm`
 
 The ID to extract here is: `PLm5pKYShxnXB1g2LixFdKxjAvl3P2O4Hm`
 
-The same goes for streams / videos, lets say you love this video:
+Now, lets say you love this video:
 
 `https://www.youtube.com/watch?v=rCFmLjGq3Jg`
 
@@ -52,7 +54,7 @@ For example:
 }
 ```
 
-I will work on a more appropriate way of attributing these creators (i.e. see `src/renderer/assets/attribution.md`), but until then please refer to the file above.
+I will work on a more appropriate way of attributing these creators (i.e. see [`src/renderer/assets/attribution.md`](https://github.com/aaronleopold/music-menubar/blob/main/src/renderer/assets/attribution.md)), but until then please refer to the file above.
 
 #### Contributing
 
