@@ -57,7 +57,10 @@ export default function Header({ back, title, action, dark, clear }: Props) {
           <Link
             to={back ? back : ".."}
             className={clsx(
-              (clear || dark) && "text-white hover:bg-gray-700",
+              clear &&
+                dark &&
+                "text-white hover:bg-gray-200 hover:text-gray-800",
+              !clear && dark && "text-white hover:bg-gray-700",
               !clear && !dark && "hover:bg-gray-200",
               "rounded-full p-2 focus:outline-none transition-colors duration-150"
             )}
@@ -80,7 +83,7 @@ export default function Header({ back, title, action, dark, clear }: Props) {
         <h1
           className={clsx(
             dark ? "text-white" : "text-gray-900",
-            "text-center text-2xl font-bold flex-1"
+            "text-center text-2xl font-bold flex-1 truncate"
           )}
         >
           {title}

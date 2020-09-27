@@ -24,6 +24,8 @@ export default observer(() => {
   return (
     <div className={clsx(theme && theme === "dark" && "bg-dark", "h-screen")}>
       <Header title="Settings" dark={theme === "dark"} />
+      TODO: prompt user as to why they may need any of these, so they are
+      informed as to what they are and if they need them
       <div className="p-6 flex flex-col space-y-5">
         <Toggle
           enabled={theme === "dark"}

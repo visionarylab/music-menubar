@@ -3,6 +3,7 @@ import Modal, { ModalContent, ModalFooter } from "../ui/Modal";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
 import { parseUrl } from "../../utils";
+import Divider from "../ui/Divider";
 
 type ModalProps = {
   open: boolean;
@@ -74,17 +75,10 @@ export default observer(({ open, onClose }: ModalProps) => {
             />
           </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm leading-5">
-              <span className="px-2 bg-white text-gray-500">Or</span>
-            </div>
-          </div>
+          <Divider text="Or" />
 
           <p className="text-sm text-gray-600">
-            Paste the URL below and see if we can extract the info for you!
+            Paste the URL below to see if we can extract the info for you!
           </p>
 
           <div>
@@ -92,7 +86,7 @@ export default observer(({ open, onClose }: ModalProps) => {
               Playlist URL
             </label>
 
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 items-center">
               <input
                 className="form-input flex-1 mt-1 rounded-md border border-gray-300 px-4 py-2 text-sm leading-5"
                 placeholder="Enter your playlist URL here"
@@ -101,7 +95,7 @@ export default observer(({ open, onClose }: ModalProps) => {
               />
 
               <button
-                className="px-3 bg-gray-200 rounded-md"
+                className="px-3 bg-gray-200 rounded-md my-1"
                 onClick={onParseUrl}
               >
                 parse

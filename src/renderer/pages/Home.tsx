@@ -7,8 +7,10 @@ import clsx from "clsx";
 
 // THIS IS MESSY
 import ytGif from "../assets/homepage/mastermind.gif";
+import ytLogoGif from "../assets/homepage/ytlogo.gif";
 
-import spotifyGif from "../assets/homepage/yt.gif";
+import spotifyGif from "../assets/homepage/spotifybg.gif";
+import spotifyLogoGif from "../assets/homepage/spotify.gif";
 
 import soundCloudGif from "../assets/homepage/nightshift.gif";
 // I DONT LIKE DIRECT IMPORTS
@@ -100,35 +102,21 @@ export default observer(() => {
       />
       <div className="full-minus-header">
         <PageLink to="spotify" bg={spotifyGif}>
-          {/* <img className="object-cover w-1/2 mx-auto" src={spotifyTitleGif} /> */}
-          TODO: spotify
+          <img
+            className="object-cover w-1/3 mx-auto opacity-50 hover:opacity-100 transition-opacity ease-in-out duration-200"
+            src={spotifyLogoGif}
+          />
         </PageLink>
 
         <PageLink to="soundcloud" bg={soundCloudGif}>
-          TODO: soundcloud
+          SoundCloud
         </PageLink>
 
         <PageLink to="/youtube" bg={ytGif}>
-          <svg
-            className="relative inline-flex rounded-full w-24 h-24"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <img
+            className="object-cover w-1/3 mx-auto opacity-50 hover:opacity-100  transition-opacity ease-in-out duration-200"
+            src={ytLogoGif}
+          />
         </PageLink>
       </div>
     </div>

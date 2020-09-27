@@ -3,6 +3,7 @@ import Modal, { ModalContent, ModalFooter } from "../ui/Modal";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
 import { parseUrl } from "../../utils";
+import Divider from "../ui/Divider";
 
 type ModalProps = {
   open: boolean;
@@ -74,17 +75,10 @@ export default observer(({ open, onClose }: ModalProps) => {
             />
           </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm leading-5">
-              <span className="px-2 bg-white text-gray-500">Or</span>
-            </div>
-          </div>
+          <Divider text="Or" />
 
           <p className="text-sm text-gray-600">
-            Paste the URL below and see if we can extract the info for you!
+            Paste the URL below to see if we can extract the info for you!
           </p>
 
           <div>
