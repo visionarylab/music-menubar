@@ -95,10 +95,10 @@ export default observer(({ open, onClose }: ModalProps) => {
               />
 
               <button
-                className="px-3 bg-gray-200 rounded-md"
+                className="px-3 bg-gray-200 rounded-md text-sm"
                 onClick={onParseUrl}
               >
-                parse
+                Parse
               </button>
             </div>
 
