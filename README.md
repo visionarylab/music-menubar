@@ -1,8 +1,8 @@
 # music-menubar
 
-tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
-
 ![Supported Platforms](https://camo.githubusercontent.com/a50c47295f350646d08f2e1ccd797ceca3840e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6d61634f5325323025374325323057696e646f77732532302537432532304c696e75782d6c69676874677265792e737667)
+
+tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
 
 <p align="center">
   <img src="./src/renderer/assets/readme-demo.gif">

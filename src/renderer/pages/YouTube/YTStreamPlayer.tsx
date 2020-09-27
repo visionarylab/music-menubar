@@ -8,7 +8,7 @@ import { getRandomGif } from "../../utils";
 // import "youtube";
 import clsx from "clsx";
 import Loader from "react-loader-spinner";
-import { Gif, gifs } from "../../assets/gifs";
+import { Gif } from "../../assets/gifs";
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
