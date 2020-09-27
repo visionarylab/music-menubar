@@ -2,6 +2,10 @@
 
 tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
 
+<p align="center">
+  <img src="./src/renderer/assets/readme-demo.gif">
+</p>
+
 ### More deets
 
 I'm always trying to create things to help improve my workflow, and while this app may only be a small improvement, it is more than enough for me.
