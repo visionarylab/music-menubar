@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
-// import axios from "axios";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
@@ -9,7 +8,6 @@ import "youtube";
 import { getRandomGif } from "../../utils";
 import Loader from "react-loader-spinner";
 import clsx from "clsx";
-// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 // const baseURL = "https://www.googleapis.com/youtube/v3/playlistItems";
 
@@ -24,7 +22,6 @@ if (typeof YT == "undefined" || typeof YT.Player == "undefined") {
 // TODO: store onExit view function to collect where left off in playlist if not finished
 // TODO: collect any stored info about where left off and initialize player with that on navigate
 // to page
-// TODO: hide iframe, load gifs instead
 
 export default observer(() => {
   const store = useMst();
@@ -35,12 +32,14 @@ export default observer(() => {
   const dark = theme === "dark";
 
   const [player, createPlayer] = useState<YT.Player | undefined>();
+  const playerRef = useRef(player);
 
   const [playing, setPlaying] = useState(false);
 
   const [current, setCurrent] = useState<
-    { title: string; url: string } | undefined
+    { title: string; videoUrl: string; videoId: string } | undefined
   >();
+  const currentRef = useRef(current);
 
   const [bg, setBg] = useState<any>();
 
@@ -52,7 +51,9 @@ export default observer(() => {
     const { favorites } = youtube;
 
     const existing = favorites.find((favorite) => {
-      return favorite.name === current.title && favorite.link === current.url;
+      return (
+        favorite.name === current.title && favorite.link === current.videoUrl
+      );
     });
 
     return existing;
@@ -64,7 +65,7 @@ export default observer(() => {
     const existing = checkIsFavorite();
 
     if (!existing) {
-      youtube.addFavorite(current.title, current.url);
+      youtube.addFavorite(current.title, current.videoUrl);
     } else {
       youtube.deleteFavorite(existing);
     }
@@ -82,22 +83,31 @@ export default observer(() => {
 
   function onPlayerStateChange(e: any) {
     const { videoUrl } = e.target.playerInfo;
-    const { title } = e.target.playerInfo.videoData;
+    const { title, video_id } = e.target.playerInfo.videoData;
 
     const currentlyPlaying = e.target.getPlayerState() === 1;
 
     if (currentlyPlaying !== playing) {
-      if (!playing && currentlyPlaying) {
-        // FIXME: pausing triggers BG change
-        setBg(getRandomGif().gif);
-      }
       setPlaying(currentlyPlaying);
     }
 
-    if (!current || current.title !== title || current.url !== videoUrl) {
-      setCurrent({ title, url: videoUrl });
+    if (
+      !currentRef.current ||
+      currentRef.current.title !== title ||
+      currentRef.current.videoId !== video_id
+    ) {
+      // console.log(currentRef.current, title, videoUrl);
+      setCurrent({ title, videoUrl, videoId: video_id });
+      setBg(getRandomGif().gif);
     }
   }
+
+  // Updating the reference to the player state, so the
+  // useEffect hook underneath can properly clean up
+  useEffect(() => {
+    playerRef.current = player;
+    currentRef.current = current;
+  }, [player, current]);
 
   useEffect(() => {
     if (!player) {
@@ -118,7 +128,22 @@ export default observer(() => {
 
       setPlaying(true);
     }
-  });
+
+    // on the unmount, I will eventually want to store the
+    // players current position in the playlist. This cleanup
+    // function will get the current playtime and playlist index
+    // to be used in reinitializing the player object next time
+    // this playlist is selected
+    // TODO
+    return () => {
+      if (playerRef.current) {
+        const timePlayed = playerRef.current.getCurrentTime();
+        const playlistIndex = playerRef.current.getPlaylistIndex();
+
+        console.log(timePlayed, playlistIndex);
+      }
+    };
+  }, []);
 
   return (
     <div

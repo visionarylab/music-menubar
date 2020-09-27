@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../../models";
 import Header from "../../components/Header";
@@ -34,8 +34,9 @@ export default observer(() => {
   const [playing, setPlaying] = useState(false);
 
   const [current, setCurrent] = useState<
-    { title: string; url: string } | undefined
+    { title: string; videoUrl: string; videoId: string } | undefined
   >();
+  const currentRef = useRef(current);
 
   const [bg, setBg] = useState<any>();
 
@@ -50,24 +51,28 @@ export default observer(() => {
   }
 
   function onPlayerStateChange(e: any) {
-    console.log(e.target.playerInfo);
-
     const { videoUrl } = e.target.playerInfo;
-    const { title } = e.target.playerInfo.videoData;
+    const { title, video_id } = e.target.playerInfo.videoData;
 
     const currentlyPlaying = e.target.getPlayerState() === 1;
 
     if (currentlyPlaying !== playing) {
-      if (!playing && currentlyPlaying) {
-        setBg(getRandomGif().gif);
-      }
       setPlaying(currentlyPlaying);
     }
 
-    if (!current || current.title !== title || current.url !== videoUrl) {
-      setCurrent({ title, url: videoUrl });
+    if (
+      !currentRef.current ||
+      currentRef.current.title !== title ||
+      currentRef.current.videoId !== video_id
+    ) {
+      setCurrent({ title, videoUrl, videoId: video_id });
+      setBg(getRandomGif().gif);
     }
   }
+
+  useEffect(() => {
+    currentRef.current = current;
+  }, [current]);
 
   useEffect(() => {
     if (!player) {
