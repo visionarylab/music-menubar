@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
 import { getRandomGif } from "../../utils";
-import "youtube";
+// import "youtube";
 import clsx from "clsx";
 import Loader from "react-loader-spinner";
 

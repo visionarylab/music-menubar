@@ -18,7 +18,9 @@ module.exports = (config) => {
 
   config.externals = ["react", "react-dom"];
 
-  config.devServer.port = 8080;
+  if (process.env.NODE_ENV === "development") {
+    config.devServer.port = 8080;
+  }
 
   return config;
 };

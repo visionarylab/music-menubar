@@ -34,11 +34,12 @@ export const rootStore = RootModel.create({
   },
 });
 
-const STORAGE_KEY = "HEY YOU YEAH YOU MAKE ME PLZ!";
+const STORAGE_KEY =
+  process.env.ELECTRON_WEBPACK_APP_STORAGE_KEY ??
+  "HEY WHY CANT I READ THE VAR FROM THE PROCESS???";
 
 onSnapshot(rootStore, (snapshot) => {
   console.log("Snapshot: ", snapshot);
-  store.set(STORAGE_KEY, snapshot);
   console.log("Snapshot persisted to storage.");
 });
 

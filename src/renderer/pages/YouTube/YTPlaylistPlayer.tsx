@@ -4,7 +4,7 @@ import { useMst } from "../../models";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import PlayerControls from "../../components/PlayerControls";
-import "youtube";
+// import "youtube";
 import { getRandomGif } from "../../utils";
 import Loader from "react-loader-spinner";
 import clsx from "clsx";
