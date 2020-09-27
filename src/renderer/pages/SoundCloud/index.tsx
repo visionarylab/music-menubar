@@ -12,7 +12,10 @@ function Home() {
   return (
     <div className={clsx(dark && "bg-dark", "min-h-screen")}>
       <Header title="SoundCloud" dark={dark} />
-      TODO
+      <p className={clsx(dark && "text-white", "text-center mt-6")}>
+        Unfortunately, SoundCloud is not currently accepting API key requests 😭
+        and so this feature will be unavailable for the time being.
+      </p>
     </div>
   );
 }

@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useHref, useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
+import { parse } from "querystring";
 
 // THIS IS MESSY
 import ytGif from "../assets/homepage/mastermind.gif";
@@ -13,6 +14,7 @@ import spotifyGif from "../assets/homepage/spotifybg.gif";
 import spotifyLogoGif from "../assets/homepage/spotify.gif";
 
 import soundCloudGif from "../assets/homepage/nightshift.gif";
+import { getTokens } from "../api/spotify";
 // I DONT LIKE DIRECT IMPORTS
 
 function PageLink({
@@ -43,30 +45,31 @@ export default observer(() => {
 
   const { theme } = store.player;
 
-  // async function initSpotify(code: any) {
-  //   const { data } = await getTokens(
-  //     btoa(
-  //       `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
-  //     ),
-  //     code,
-  //     "http://localhost:9080"
-  //   );
+  async function initSpotify(code: any) {
+    const { data } = await getTokens(
+      btoa(
+        `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
+      ),
+      code,
+      "http://localhost:8080"
+    );
 
-  //   const { access_token, refresh_token } = data;
+    const { access_token, refresh_token } = data;
 
-  //   if (access_token && refresh_token) {
-  //     store.player.spotify.setToken(access_token);
-  //     store.player.spotify.setRefreshToken(refresh_token);
-  //   }
+    if (access_token && refresh_token) {
+      store.player.spotify.setToken(access_token);
+      store.player.spotify.setRefreshToken(refresh_token);
+    }
 
-  //   window.location.href = "/";
-  // }
+    // window.location.href = "/";
+    window.location.search = "";
+  }
 
   useEffect(() => {
-    // const code = qs.parse(window.location.search)["?code"];
-    // if (code) {
-    //   initSpotify(code);
-    // }
+    const code = parse(window.location.search)["?code"];
+    if (code) {
+      initSpotify(code);
+    }
   });
 
   // const { token } = store.player;
