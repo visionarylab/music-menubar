@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useMst } from "../models";
 import Header from "../components/Header";
-import { Link, useHref, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { parse } from "querystring";
+import { getTokens } from "../api/spotify";
 
 // THIS IS MESSY
 import ytGif from "../assets/homepage/mastermind.gif";
@@ -14,7 +15,6 @@ import spotifyGif from "../assets/homepage/spotifybg.gif";
 import spotifyLogoGif from "../assets/homepage/spotify.gif";
 
 import soundCloudGif from "../assets/homepage/nightshift.gif";
-import { getTokens } from "../api/spotify";
 // I DONT LIKE DIRECT IMPORTS
 
 function PageLink({

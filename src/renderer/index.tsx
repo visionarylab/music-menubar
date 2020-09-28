@@ -10,19 +10,6 @@ import YouTube from "./pages/YouTube";
 import Spotify from "./pages/Spotify";
 import SoundCloud from "./pages/SoundCloud";
 
-// import qs from "querystring";
-
-// let re = ".*?";
-// console.log(
-//   qs.parse("v=fkM3nSz_qjc&list=PLm5pKYShxnXB1g2LixFdKxjAvl3P2O4Hm&index=44")
-// );
-
-// const test = new URLSearchParams(
-//   "https://www.youtube.com/watch?v=fkM3nSz_qjc&list=PLm5pKYShxnXB1g2LixFdKxjAvl3P2O4Hm&index=44"
-// );
-
-// test.forEach((e) => console.log(e));
-
 require("dotenv").config();
 
 function App() {

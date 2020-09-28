@@ -8,6 +8,13 @@ export const scopes = [
   "user-top-read",
   "user-read-currently-playing",
   "user-read-playback-state",
+  "streaming",
+  "playlist-read-collaborative",
+  "user-modify-playback-state",
+  "user-read-email",
+  "user-read-private",
+  "user-library-read",
+  "user-library-modify",
 ];
 
 export async function getTokens(
