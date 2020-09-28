@@ -1,6 +1,10 @@
 # music-menubar
 
 ![Supported Platforms](https://camo.githubusercontent.com/a50c47295f350646d08f2e1ccd797ceca3840e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6d61634f5325323025374325323057696e646f77732532302537432532304c696e75782d6c69676874677265792e737667)
+![Top Language](https://img.shields.io/github/languages/top/aaronleopold/music-menubar)
+![Issues Open](https://img.shields.io/github/issues-raw/aaronleopold/music-menubar)
+![Hacktoberfest](https://img.shields.io/github/hacktoberfest/2020/aaronleopold/music-menubar)
+[![Buy me a tree](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-lightgreen)](https://www.buymeacoffee.com/aaronbleop)
 
 tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
 

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { getPlaylists } from "../../api/spotify";
 import Header from "../../components/Header";
 import Playlist from "../../components/Spotify/Playlist";

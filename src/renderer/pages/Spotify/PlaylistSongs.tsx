@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getTracks } from "../../api/spotify";
 import Header from "../../components/Header";
 import { useMst } from "../../models";
