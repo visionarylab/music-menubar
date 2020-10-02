@@ -14,7 +14,7 @@ export const rootStore = RootModel.create({
           playlistId: "PLuCUpg5b_vRqWMNwIH5oazz_qD170NtI4",
         },
         {
-          name: "💕Lofi Hip Hop💕",
+          name: "💕 Lofi Hip Hop 💕",
           playlistId: "PLOzDu-MXXLliO9fBNZOQTBDddoA3FzZUo",
         },
         {

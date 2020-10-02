@@ -29,6 +29,11 @@ Until a release has been made, you can follow the development startup procedure 
 ```bash
 git clone https://github.com/aaronleopold/music-menubar.git
 cd music-menubar
+```
+
+Then, configure a `.env` file using the provided `.env.example` file. Once this step is finished, you can install the dependencies and run the program:
+
+```bash
 yarn
 yarn dev
 ```
