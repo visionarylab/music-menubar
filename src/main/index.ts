@@ -5,6 +5,7 @@ import is from "electron-is";
 import { menubar, Menubar } from "menubar";
 import { autoUpdater } from "electron-updater";
 import open from "open";
+import { addContextmenu } from "./menu";
 
 autoUpdater.checkForUpdatesAndNotify();
 
@@ -13,7 +14,7 @@ let mb: Menubar;
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
 ipcMain.on("notify", () => {
-  mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
+  mb.tray.setImage(path.resolve(__dirname, "assets/cassette.png"));
 });
 
 app.on("ready", () => {
@@ -26,7 +27,7 @@ app.on("ready", () => {
           protocol: "file:",
           slashes: true,
         }),
-    icon: path.resolve(__dirname, "cassette.png"),
+    icon: path.resolve(__dirname, "assets/cassette.png"),
     tooltip: "menubar",
     browserWindow: {
       //   transparent: true,
@@ -38,7 +39,7 @@ app.on("ready", () => {
         nodeIntegration: true,
       },
     },
-    showOnAllWorkspaces: false,
+    // showOnAllWorkspaces: false,
     // preloadWindow: true,
   });
 
@@ -46,11 +47,13 @@ app.on("ready", () => {
     if (is.dev()) {
       mb.window?.webContents.openDevTools({ mode: "undocked" });
     }
+
+    addContextmenu(mb);
   });
 
-  mb.on("after-show", () => {
-    mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
-  });
+  // mb.on("after-show", () => {
+  //   mb.tray.setImage(path.resolve(__dirname, "cassette.png"));
+  // });
 });
 
 // reroute new windows to default browser

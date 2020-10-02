@@ -146,6 +146,11 @@ export default observer(() => {
     };
   }, []);
 
+  // if (player) {
+  //   console.log(playerRef.current?.getDuration());
+  //   playerRef.current?.seekTo(140, true);
+  // }
+
   return (
     <div
       className={clsx(dark && "bg-dark", "relative h-screen overflow-hidden")}
