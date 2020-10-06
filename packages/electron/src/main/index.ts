@@ -14,7 +14,7 @@ let mb: Menubar;
 app.commandLine.appendSwitch("ignore-certificate-errors");
 
 app.on("ready", () => {
-  console.log(process.env.ELECTRON_WEBPACK_WDS_PORT);
+  // console.log(process.env.ELECTRON_WEBPACK_WDS_PORT);
   mb = menubar({
     index: is.dev()
       ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
