@@ -107,11 +107,8 @@ const getKeyboardMapping = (
       "keyup",
       new Map<string, (event: KeyboardEvent) => any>([
         [" ", toggle],
-        ["spacebar", toggle],
-        // left arrow
-        [String.fromCharCode(37), onReplay],
-        // right arrow
-        [String.fromCharCode(39), onSkip],
+        ["ArrowLeft", onReplay],
+        ["ArrowRight", onSkip],
       ]),
     ],
   ]),
