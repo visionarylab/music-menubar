@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  IKeyboardControlsProps,
+  KeyboardControls,
+} from "./utils/keyboardControls/KeyboardControls";
+import { KeyboardEventTypes } from "./utils/keyboardControls/KeyboardEventTypes";
 
 type Controls = {
   playing: boolean;
@@ -22,9 +27,11 @@ export default function PlayerControls({
       onPlay();
     }
   }
+  const keyboardMappings = getKeyboardMapping(toggle, onReplay, onSkip);
 
   return (
     <div>
+      <KeyboardControls {...keyboardMappings} />
       <div className="absolute inset-x-0 bottom-0  py-2 ">
         <div className="flex space-x-4 justify-center items-center pb-2 text-white text-shadow-lg">
           {onReplay && (
@@ -86,3 +93,23 @@ export default function PlayerControls({
     </div>
   );
 }
+
+const getKeyboardMapping = (
+  toggle: () => any,
+  onReplay: () => any = () => {},
+  onSkip: () => any = () => {}
+): IKeyboardControlsProps => ({
+  mappings: new Map<
+    KeyboardEventTypes,
+    Map<string, (event: KeyboardEvent) => any>
+  >([
+    [
+      "keyup",
+      new Map<string, (event: KeyboardEvent) => any>([
+        [" ", toggle],
+        ["ArrowLeft", onReplay],
+        ["ArrowRight", onSkip],
+      ]),
+    ],
+  ]),
+});
