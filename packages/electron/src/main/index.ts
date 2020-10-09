@@ -6,7 +6,7 @@ import { menubar, Menubar } from "menubar";
 import { autoUpdater } from "electron-updater";
 import open from "open";
 import { addContextmenu } from "./menu";
-import { manageTouchBars } from "./TouchBarManager";
+import { manageTouchBars } from "./touchbarManager";
 
 autoUpdater.checkForUpdatesAndNotify();
 
