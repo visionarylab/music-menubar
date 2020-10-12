@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "baseUrl": ".",
+    "outDir": "lib",
+    "strict": true,
+    "target": "es2017",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "typeRoots": ["node_modules/@types", "@types"]
+  },
+  "include": ["src", "@types"],
+  "exclude": ["node_modules"]
+}

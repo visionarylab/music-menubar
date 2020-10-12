@@ -11,6 +11,6 @@
     "install:all": "yarn install:electron && yarn install:tui",
     "dev:electron": "cd packages/electron && yarn dev",
     "build:electron": "cd packages/electron && yarn build",
-    "dev:tui": "echo nothing here yet"
+    "dev:tui": "cd packages/tui && yarn dev"
   }
 }

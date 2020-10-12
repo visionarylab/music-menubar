@@ -1,4 +1,4 @@
-import { getTouchBarIcon, TouchBarIcons } from "./TouchBarIcons";
+import { getTouchBarIcon, TouchBarIcons } from "./touchBarIcons";
 import { mainWindow } from "./../index";
 import { TouchBar } from "electron";
 import { ipcPlayerMessages } from "../../ipcMessages/ipcPlayerMessages";
