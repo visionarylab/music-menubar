@@ -1,10 +1,10 @@
-import React from "react";
-import { ipcPlayerMessages } from "../../ipcMessages/ipcPlayerMessages";
-import { ipcTouchbarMessage } from "../../ipcMessages/ipcTouchbarMessage";
+import React from 'react';
+import { ipcPlayerMessages } from '../../ipcMessages/ipcPlayerMessages';
+import { ipcTouchbarMessage } from '../../ipcMessages/ipcTouchbarMessage';
 import {
   ITouchBarMessageHandler,
   TouchBarListener,
-} from "./utils/touchBarManager/TouchBarListener";
+} from './utils/touchBarManager/TouchBarListener';
 
 interface ITouchBarControls {
   playing: boolean;

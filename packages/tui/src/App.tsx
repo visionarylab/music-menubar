@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { render, Box, useInput, useApp, Text } from "ink";
-import Logo from "./components/Logo";
+import React, { useState, useEffect } from 'react';
+import { render, Box, useInput, useApp, Text } from 'ink';
+import Logo from './components/Logo';
 
 function App() {
   const [height, setHeight] = useState(process.stdout.rows);
   const { exit } = useApp();
 
   useInput((input, _key) => {
-    if (input === "q") {
+    if (input === 'q') {
       exit();
     }
   });

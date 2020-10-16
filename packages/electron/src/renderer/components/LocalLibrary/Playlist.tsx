@@ -1,21 +1,20 @@
-import React from "react";
-import * as mm from "music-metadata";
+import React from 'react';
+import mm from 'music-metadata';
 
-type AudioFile = {
+export type AudioFile = {
   metadata: mm.IAudioMetadata;
   path: string;
 };
 
-type LocalPlaylist = {
+export type LocalPlaylist = {
   audio: AudioFile[];
 };
 
 export default function Playlist({ audio }: LocalPlaylist) {
   return (
-    <>
-      <div>Your Library</div>
+    <React.Fragment>
       {audio.map((file) => (
-        <>
+        <div key={file.path}>
           <div>
             <span>
               <b>Title: </b>
@@ -28,9 +27,8 @@ export default function Playlist({ audio }: LocalPlaylist) {
               {file.metadata.common.artist}
             </span>
           </div>
-          <br></br>
-        </>
+        </div>
       ))}
-    </>
+    </React.Fragment>
   );
 }

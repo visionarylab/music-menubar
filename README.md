@@ -4,7 +4,7 @@
 ![Top Language](https://img.shields.io/github/languages/top/aaronleopold/music-menubar)
 ![Issues Open](https://img.shields.io/github/issues-raw/aaronleopold/music-menubar)
 ![Hacktoberfest](https://img.shields.io/github/hacktoberfest/2020/aaronleopold/music-menubar)
-[![Buy me a tree](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-lightgreen)](https://www.buymeacoffee.com/aaronbleop)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-lightgreen)](https://www.buymeacoffee.com/aaronbleop)
 
 tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
 
@@ -83,7 +83,7 @@ For example:
 }
 ```
 
-I will work on a more appropriate way of attributing these creators (i.e. see [`src/renderer/assets/attribution.md`](https://github.com/aaronleopold/music-menubar/blob/main/src/renderer/assets/attribution.md)), but until then please refer to the file above.
+I will work on a more appropriate way of attributing these creators (i.e. see [`packages/electron/src/renderer/assets/attribution.md`](https://github.com/aaronleopold/music-menubar/blob/main/packages/electron/src/renderer/assets/attribution.md)), but until then please refer to the file above.
 
 #### Contributing
 

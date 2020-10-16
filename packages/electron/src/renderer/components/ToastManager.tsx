@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { useMst } from "../models";
-import { Bread } from "../types";
+import { motion } from 'framer-motion';
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { useMst } from '../models';
+import { Bread } from '../types';
 
 type ToastProps = { onDelete(): void } & Bread;
 
@@ -10,10 +10,10 @@ function Toast({ title, onDelete }: ToastProps) {
   return (
     <motion.div
       className="w-screen max-w-md z-50"
-      initial={{ translateX: "100%" }}
+      initial={{ translateX: '100%' }}
       animate={{ translateX: 0 }}
-      exit={{ translateX: "100%" }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
+      exit={{ translateX: '100%' }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
       <div className="fixed bottom-0 inset-x-0 pb-2 sm:pb-5 w-screen px-2">
         <div className="p-2 rounded-lg bg-green-600 shadow-lg">

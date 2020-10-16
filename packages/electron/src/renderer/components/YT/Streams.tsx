@@ -1,19 +1,19 @@
-import clsx from "clsx";
-import { observer } from "mobx-react-lite";
-import { Instance } from "mobx-state-tree";
-import React from "react";
+import clsx from 'clsx';
+import { observer } from 'mobx-react-lite';
+import { Instance } from 'mobx-state-tree';
+import React from 'react';
 import {
   DragDropContext,
   Draggable,
   Droppable,
   DroppableProvided,
-} from "react-beautiful-dnd";
-import { useMst } from "../../models";
-import { YTStream } from "../../models/YouTube";
-import CreateStreamModal from "./CreateStreamModal";
-import useToggle from "../utils/useToggle";
-import ListHeader from "./ListHeader";
-import Stream from "./ListItem";
+} from 'react-beautiful-dnd';
+import { useMst } from '../../models';
+import { YTStream } from '../../models/YouTube';
+import CreateStreamModal from './CreateStreamModal';
+import useToggle from '../utils/useToggle';
+import ListHeader from './ListHeader';
+import Stream from './ListItem';
 
 type DroppableProps = {
   streams: Instance<typeof YTStream>[];
@@ -31,8 +31,8 @@ const DroppableList = observer(
         {...provided.droppableProps}
         ref={provided.innerRef}
         className={clsx(
-          dark ? "divide-gray-800" : "divide-gray-200",
-          "divide-y"
+          dark ? 'divide-gray-800' : 'divide-gray-200',
+          'divide-y'
         )}
       >
         {streams.map((stream, index) => (
@@ -66,7 +66,7 @@ export default observer(() => {
   const store = useMst();
 
   const { youtube } = store.player;
-  const dark = store.player.theme === "dark";
+  const dark = store.player.theme === 'dark';
 
   const [open, { toggle, off }] = useToggle(false);
 

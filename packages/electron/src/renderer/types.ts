@@ -1,4 +1,4 @@
 export type Bread = {
-  status: "error" | "success";
+  status: 'error' | 'success';
   title: string;
 };

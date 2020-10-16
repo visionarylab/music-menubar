@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-function useMediaQuery(query: string, isIOS: boolean) {
+export const SCREEN_SIZES = {
+  SMALL: "(min-width: 640px)",
+  MEDIUM: "(min-width: 768px)",
+  LARGE: "(min-width: 1024px)",
+  XL: "(min-width: 1280px)",
+};
+
+export default function useMediaQuery(query: string, isIOS: boolean) {
   const [match, setMatch] = useState(() => window.matchMedia(query).matches);
 
   useEffect(() => {
@@ -29,5 +36,3 @@ function useMediaQuery(query: string, isIOS: boolean) {
 
   return match;
 }
-
-export default useMediaQuery;

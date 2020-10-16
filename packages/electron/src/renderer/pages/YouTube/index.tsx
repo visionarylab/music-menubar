@@ -1,31 +1,31 @@
-import React from "react";
-import Header from "../../components/Header";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { useMst } from "../../models";
-import clsx from "clsx";
-import Playlists from "../../components/YT/Playlists";
-import Streams from "../../components/YT/Streams";
-import YTPlaylistPlayer from "./YTPlaylistPlayer";
-import YTPlaylistSettings from "./YTPlaylistSettings";
-import YTStreamPlayer from "./YTStreamPlayer";
-import YTStreamSettings from "./YTStreamSettings";
-import YTFavorites from "./YTFavorites";
+import React from 'react';
+import Header from '../../components/Header';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useMst } from '../../models';
+import clsx from 'clsx';
+import Playlists from '../../components/YT/Playlists';
+import Streams from '../../components/YT/Streams';
+import YTPlaylistPlayer from './YTPlaylistPlayer';
+import YTPlaylistSettings from './YTPlaylistSettings';
+import YTStreamPlayer from './YTStreamPlayer';
+import YTStreamSettings from './YTStreamSettings';
+import YTFavorites from './YTFavorites';
 
 function Home() {
   const store = useMst();
 
   const navigate = useNavigate();
 
-  const dark = store.player.theme === "dark";
+  const dark = store.player.theme === 'dark';
 
   return (
-    <div className={clsx(dark && "bg-dark", "min-h-screen")}>
+    <div className={clsx(dark && 'bg-dark', 'min-h-screen')}>
       <Header
         title="YouTube"
         dark={dark}
         action={
           <button
-            onClick={() => navigate("favorites")}
+            onClick={() => navigate('favorites')}
             className="text-white hover:bg-gray-700 rounded-full p-2 focus:outline-none transition-colors duration-150"
           >
             <svg

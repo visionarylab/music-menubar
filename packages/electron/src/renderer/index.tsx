@@ -1,17 +1,17 @@
-import "./index.css";
-import React from "react";
-import { render } from "react-dom";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import { Provider } from "./models";
-import Settings from "./pages/Settings";
-import ToastManager from "./components/ToastManager";
-import YouTube from "./pages/YouTube";
-import Spotify from "./pages/Spotify";
-import SoundCloud from "./pages/SoundCloud";
-import LocalLibrary from "./pages/LocalLibrary";
+import './index.css';
+import React from 'react';
+import { render } from 'react-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import { Provider } from './models';
+import Settings from './pages/Settings';
+import ToastManager from './components/ToastManager';
+import YouTube from './pages/YouTube';
+import Spotify from './pages/Spotify';
+import SoundCloud from './pages/SoundCloud';
+import LocalLibrary from './pages/LocalLibrary';
 
-require("dotenv").config();
+require('dotenv').config();
 
 function App() {
   return (
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));

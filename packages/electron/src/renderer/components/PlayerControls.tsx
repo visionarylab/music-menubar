@@ -1,10 +1,10 @@
-import React from "react";
-import { TouchBarPlayerControls } from "./TouchBarPlayerControls";
+import React from 'react';
+import { TouchBarPlayerControls } from './TouchBarPlayerControls';
 import {
   IKeyboardControlsProps,
   KeyboardControls,
-} from "./utils/keyboardControls/KeyboardControls";
-import { KeyboardEventTypes } from "./utils/keyboardControls/KeyboardEventTypes";
+} from './utils/keyboardControls/KeyboardControls';
+import { KeyboardEventTypes } from './utils/keyboardControls/KeyboardEventTypes';
 
 type Controls = {
   playing: boolean;
@@ -112,11 +112,11 @@ const getKeyboardMapping = (
     Map<string, (event: KeyboardEvent) => any>
   >([
     [
-      "keyup",
+      'keyup',
       new Map<string, (event: KeyboardEvent) => any>([
-        [" ", toggle],
-        ["ArrowLeft", onReplay],
-        ["ArrowRight", onSkip],
+        [' ', toggle],
+        ['ArrowLeft', onReplay],
+        ['ArrowRight', onSkip],
       ]),
     ],
   ]),

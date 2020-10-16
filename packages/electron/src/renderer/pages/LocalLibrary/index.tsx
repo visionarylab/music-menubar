@@ -1,12 +1,14 @@
-import clsx from "clsx";
-import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import Header from "../../components/Header";
-import { useMst } from "../../models";
-import * as mm from "music-metadata";
-import Playlist from "../../components/LocalLibrary/Playlist";
-const fs = require("fs");
-const path = require("path");
+import clsx from 'clsx';
+import React, { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Header from '../../components/Header';
+import { useMst } from '../../models';
+import * as mm from 'music-metadata';
+import Playlist, { AudioFile } from '../../components/LocalLibrary/Playlist';
+import LocalPlayer from '../../components/LocalLibrary/LocalPlayer';
+
+const fs = require('fs');
+const path = require('path');
 
 const parseAsAudio = async (files: any[]) => {
   const audioData: any[] = [];
@@ -31,13 +33,13 @@ const scanFiles = (filepath: string, filelist: any[]) => {
       filelist = scanFiles(path.join(filepath, file), filelist);
     } else {
       if (
-        file.endsWith(".mp3") ||
-        file.endsWith(".m4a") ||
-        file.endsWith(".webm") ||
-        file.endsWith(".wav") ||
-        file.endsWith(".aac") ||
-        file.endsWith(".ogg") ||
-        file.endsWith(".opus")
+        file.endsWith('.mp3') ||
+        file.endsWith('.m4a') ||
+        file.endsWith('.webm') ||
+        file.endsWith('.wav') ||
+        file.endsWith('.aac') ||
+        file.endsWith('.ogg') ||
+        file.endsWith('.opus')
       ) {
         filelist.push(path.join(filepath, file));
       }
@@ -47,13 +49,13 @@ const scanFiles = (filepath: string, filelist: any[]) => {
 };
 
 function Home() {
-  const [audioFiles, setAudioFiles] = useState<any[]>([]);
+  const [audioFiles, setAudioFiles] = useState<AudioFile[]>([]);
   const [isInvalidPath, setIsInvalidPath] = useState<boolean>(false);
   const store = useMst();
+  const { local } = store.player;
 
   useEffect(() => {
-    const { local } = store.player;
-    if (local.path && local.path !== "") {
+    if (local.path && local.path !== '') {
       try {
         const loadedFiles = scanFiles(local.path, []);
         parseAsAudio(loadedFiles).then((audioData) => {
@@ -68,26 +70,29 @@ function Home() {
     }
   }, []);
 
-  const dark = store.player.theme === "dark";
+  const dark = store.player.theme === 'dark';
 
   return (
-    <div className={clsx(dark && "bg-dark", "min-h-screen")}>
+    <div className={clsx(dark && 'bg-dark', 'min-h-screen')}>
       <Header title="Library" dark={dark} />
-      <p className={clsx(dark && "text-white", "text-center mt-6")}>
+      <div className={clsx(dark && 'text-white', 'text-center mt-6')}>
         {isInvalidPath ? (
-          "Your local library path is invalid. Please check your settings page."
+          'Your local library path is invalid. Please check your settings page.'
         ) : (
           <Playlist audio={audioFiles} />
         )}
-      </p>
+      </div>
     </div>
   );
 }
 
 export default function () {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <React.Fragment>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+      <LocalPlayer loaded />
+    </React.Fragment>
   );
 }

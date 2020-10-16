@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Modal, { ModalContent, ModalFooter } from "../ui/Modal";
-import { observer } from "mobx-react-lite";
-import { useMst } from "../../models";
-import { parseUrl } from "../../utils";
-import Divider from "../ui/Divider";
+import React, { useState } from 'react';
+import Modal, { ModalContent, ModalFooter } from '../ui/Modal';
+import { observer } from 'mobx-react-lite';
+import { useMst } from '../../models';
+import { parseUrl } from '../../utils';
+import Divider from '../ui/Divider';
 
 type ModalProps = {
   open: boolean;
@@ -12,11 +12,11 @@ type ModalProps = {
 
 export default observer(({ open, onClose }: ModalProps) => {
   const store = useMst();
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
-  const [url, setUrl] = useState("");
+  const [name, setName] = useState('');
+  const [id, setId] = useState('');
+  const [url, setUrl] = useState('');
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   function onSubmit() {
     if (name && id) {
@@ -32,11 +32,11 @@ export default observer(({ open, onClose }: ModalProps) => {
 
     console.log(params);
 
-    if (params && params.list && typeof params.list === "string") {
+    if (params && params.list && typeof params.list === 'string') {
       setId(params.list);
     } else {
       // toast notify cannot parse params
-      setError("Could not parse URL");
+      setError('Could not parse URL');
     }
   }
 
@@ -104,7 +104,7 @@ export default observer(({ open, onClose }: ModalProps) => {
 
             {error && (
               <p
-                onClick={() => setError("")}
+                onClick={() => setError('')}
                 className="text-red-500 text-sm leading-5 cursor-pointer pt-1 ml-1"
               >
                 {error}

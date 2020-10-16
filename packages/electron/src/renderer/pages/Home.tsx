@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { observer } from "mobx-react-lite";
-import { useMst } from "../models";
-import Header from "../components/Header";
-import { Link } from "react-router-dom";
-import clsx from "clsx";
-import { parse } from "querystring";
-import { getTokens } from "../api/spotify";
+import React, { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useMst } from '../models';
+import Header from '../components/Header';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+import { parse } from 'querystring';
+import { getTokens } from '../api/spotify';
 
 // THIS IS MESSY
-import ytGif from "../assets/homepage/mastermind.gif";
-import ytLogoGif from "../assets/homepage/ytlogo.gif";
+import ytGif from '../assets/homepage/mastermind.gif';
+import ytLogoGif from '../assets/homepage/ytlogo.gif';
 
-import spotifyGif from "../assets/homepage/spotifybg.gif";
-import spotifyLogoGif from "../assets/homepage/spotify.gif";
+import spotifyGif from '../assets/homepage/spotifybg.gif';
+import spotifyLogoGif from '../assets/homepage/spotify.gif';
 
-import soundCloudGif from "../assets/homepage/nightshift.gif";
+import soundCloudGif from '../assets/homepage/nightshift.gif';
 // I DONT LIKE DIRECT IMPORTS
 
 function PageLink({
@@ -51,7 +51,7 @@ export default observer(() => {
         `${store.player.spotify.clientId}:${store.player.spotify.clientSecret}`
       ),
       code,
-      "http://localhost:8080"
+      'http://localhost:8080'
     );
 
     const { access_token, refresh_token } = data;
@@ -61,38 +61,35 @@ export default observer(() => {
       store.player.spotify.setRefreshToken(refresh_token);
     }
 
-    // window.location.href = "/";
-    window.location.search = "";
+    window.location.search = '';
   }
 
   useEffect(() => {
-    const code = parse(window.location.search)["?code"];
+    const code = parse(window.location.search)['?code'];
     if (code) {
       initSpotify(code);
     }
   });
 
-  // const { token } = store.player;
-
   return (
-    <div className={clsx(theme === "dark" && "bg-dark", "min-h-screen")}>
+    <div className={clsx(theme === 'dark' && 'bg-dark', 'min-h-screen')}>
       <Header
-        dark={theme === "dark"}
+        dark={theme === 'dark'}
         title="Welcome"
         action={
-          <>
+          <React.Fragment>
             <Link
               to="library"
               className={clsx(
-                theme === "dark"
-                  ? "text-white hover:bg-gray-700 "
-                  : "hover:bg-gray-200 ",
-                "rounded-full p-2 focus:outline-none transition-colors duration-150"
+                theme === 'dark'
+                  ? 'text-white hover:bg-gray-700 '
+                  : 'hover:bg-gray-200 ',
+                'rounded-full p-2 focus:outline-none transition-colors duration-150 mr-2'
               )}
             >
               <svg
                 id="Layer_1"
-                enable-background="new 0 0 28 28"
+                enableBackground="new 0 0 28 28"
                 height="28"
                 viewBox="0 0 512 512"
                 width="28"
@@ -139,10 +136,10 @@ export default observer(() => {
             <Link
               to="settings"
               className={clsx(
-                theme === "dark"
-                  ? "text-white hover:bg-gray-700 "
-                  : "hover:bg-gray-200 ",
-                "rounded-full p-2 focus:outline-none transition-colors duration-150"
+                theme === 'dark'
+                  ? 'text-white hover:bg-gray-700 '
+                  : 'hover:bg-gray-200 ',
+                'rounded-full p-2 focus:outline-none transition-colors duration-150'
               )}
             >
               <svg
@@ -157,7 +154,7 @@ export default observer(() => {
                 />
               </svg>
             </Link>
-          </>
+          </React.Fragment>
         }
       />
       <div className="full-minus-header">

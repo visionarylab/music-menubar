@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "electron-webpack dev",
+    "start": "electron-webpack dev &",
     "compile": "electron-webpack --env.minify=false",
     "package": "electron-builder",
     "build": "yarn compile && yarn package",

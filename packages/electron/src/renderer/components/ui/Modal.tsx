@@ -3,8 +3,7 @@ import { isIOS } from "react-device-detect";
 import FocusTrap from "focus-trap-react";
 import { AnimatePresence, motion } from "framer-motion";
 import noScroll from "no-scroll";
-import { MEDIA_QUERIES } from "../utils/constants";
-import useMediaQuery from "../utils/useMediaQuery";
+import useMediaQuery, { SCREEN_SIZES } from "../utils/useMediaQuery";
 
 type ContentProps = {
   title: string | React.ReactNode;
@@ -47,7 +46,7 @@ type ModalProps = {
 
 // TODO: use media queries
 export default function Modal({ open, onClose, children }: ModalProps) {
-  const atLeastSmall = useMediaQuery(MEDIA_QUERIES.SMALL, isIOS);
+  const atLeastSmall = useMediaQuery(SCREEN_SIZES.SMALL, isIOS);
 
   const modalInitial = atLeastSmall
     ? {
