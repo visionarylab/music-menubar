@@ -8,6 +8,11 @@ import waiting from "./gifs/waiting.gif";
 import stay from "./gifs/stay.gif";
 import dreamhome from "./gifs/dreamhome.gif";
 import streetsofrage from "./gifs/streetsofrage.gif";
+import reflection from "./gifs/reflection.gif";
+import futuristicjp from "./gifs/futuristicjp.gif";
+import oasiscamp from "./gifs/oasiscamp.gif";
+import camp from "./gifs/camp.gif";
+import bridge from "./gifs/bridge.gif";
 import dawnstreet from "./gifs/dawnstreet.gif";
 import plant from "./gifs/plant.gif";
 import rainyafternoon from "./gifs/rainyafternoon.gif";
@@ -60,6 +65,26 @@ export const gifs: Gif[] = [
   {
     gif: streetsofrage,
     source: "https://giphy.com/gifs/streets-of-rage-CN9sOyaRT7YVG",
+  },
+  {
+    gif: reflection,
+    source: "https://waneella.tumblr.com/image/132817775842",
+  },
+  {
+    gif: futuristicjp,
+    source: "https://waneella.tumblr.com/image/178477909282"
+  },
+  {
+    gif: oasiscamp,
+    source: "http://en.riotpixels.com/games/pathway/memes/1/"
+  },
+  {
+    gif: camp,
+    source: "http://en.riotpixels.com/games/pathway/memes/8/"
+  },
+  {
+    gif: bridge,
+    source: "https://chigiris.tumblr.com/image/169038311660"
   },
   {
     gif: dawnstreet,
