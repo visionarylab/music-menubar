@@ -3,8 +3,8 @@ import { TouchBarPlayerControls } from './TouchBarPlayerControls';
 import {
   IKeyboardControlsProps,
   KeyboardControls,
-} from './utils/keyboardControls/KeyboardControls';
-import { KeyboardEventTypes } from './utils/keyboardControls/KeyboardEventTypes';
+  KeyboardEventTypes,
+} from './utils/KeyboardControls';
 
 type Controls = {
   playing: boolean;

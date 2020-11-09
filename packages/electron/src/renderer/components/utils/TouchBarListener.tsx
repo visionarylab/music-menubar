@@ -1,8 +1,8 @@
-import { ipcRenderer } from "electron";
-import React from "react";
-import { useEffect } from "react";
-import { ipcPlayerMessages } from "../../../../ipcMessages/ipcPlayerMessages";
-import { ipcTouchbarMessage } from "../../../../ipcMessages/ipcTouchbarMessage";
+import { ipcRenderer } from 'electron';
+import React from 'react';
+import { useEffect } from 'react';
+import { ipcPlayerMessages } from '../../../main/ipc/ipcPlayerMessages';
+import { ipcTouchbarMessage } from '../../../main/ipc/ipcTouchbarMessage';
 
 export type ITouchBarMessageHandler = {
   message: ipcPlayerMessages;

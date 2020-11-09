@@ -3,7 +3,6 @@
 ![Supported Platforms](https://camo.githubusercontent.com/a50c47295f350646d08f2e1ccd797ceca3840e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6d61634f5325323025374325323057696e646f77732532302537432532304c696e75782d6c69676874677265792e737667)
 ![Top Language](https://img.shields.io/github/languages/top/aaronleopold/music-menubar)
 ![Issues Open](https://img.shields.io/github/issues-raw/aaronleopold/music-menubar)
-![Hacktoberfest](https://img.shields.io/github/hacktoberfest/2020/aaronleopold/music-menubar)
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-lightgreen)](https://www.buymeacoffee.com/aaronbleop)
 
 tldr; a dropdown media controller for your youtube playlists / videos (and planned spotify + soundcloud controller too), written using React, Tailwind CSS and Electron
@@ -72,19 +71,8 @@ Please refer to the corresponding README's for the package you wish to use
 
 ### Artwork
 
-I used a large amount (and still increasing) of gifs in the electron application, and none of it is mine. Zip. All of the art you see is thanks to other people who have amazingly great talent, and the references to all gifs used can be found in `src/renderer/assets/gifs.ts`.You'll see an array of objects, and the source field is the source. Please take the time to check it out and give let the artist know if you happen across something you love!
-
-For example:
-
-```tsx
-{
-    gif: waneela,
-    source: "https://giphy.com/gifs/cinemagraph-RkDZq0dhhYHhxdFrJB",
-}
-```
-
-I will work on a more appropriate way of attributing these creators (i.e. see [`packages/electron/src/renderer/assets/attribution.md`](https://github.com/aaronleopold/music-menubar/blob/main/packages/electron/src/renderer/assets/attribution.md)), but until then please refer to the file above.
+I used a large amount (and still increasing) of gifs in the electron application, and none of it is mine. Zip. All of the art you see is thanks to other people who have amazingly great talent, and the attribution information is located at [`packages/electron/src/renderer/assets/attribution.md`](https://github.com/aaronleopold/music-menubar/blob/main/packages/electron/src/renderer/assets/attribution.md)
 
 #### Contributing
 
-I've started creating and annotating issues specifically for the start of Hacktober. Please allow issues marked as "good first issue" to be completed by those with less experience, as I intentionally set these aside. Additionally, please refer to the [CONTRIBUTING.md](https://github.com/aaronleopold/music-menubar/blob/main/CONTRIBUTING.md) for more general information.
+If you would like to contribute, please refer to the [CONTRIBUTING.md](https://github.com/aaronleopold/music-menubar/blob/main/CONTRIBUTING.md) for more information

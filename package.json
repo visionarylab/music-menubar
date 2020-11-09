@@ -5,13 +5,17 @@
   "repository": "https://github.com/aaronleopold/music-menubar.git",
   "author": "Aaron Leopold <aaronleopold1221@gmail.com>",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "install:electron": "cd packages/electron && yarn",
     "install:tui": "cd packages/tui && yarn",
     "install:all": "yarn install:electron && yarn install:tui",
-    "dev:electron": "cd packages/electron && yarn dev",
-    "start:electron": "cd packages/electron && yarn start &",
-    "build:electron": "cd packages/electron && yarn build",
-    "dev:tui": "cd packages/tui && yarn dev"
-  }
+    "dev:electron": "yarn workspace @mm/electron run dev",
+    "start:electron": "yarn workspace @mm/electron run start",
+    "build:electron": "yarn workspace @mm/electron run build",
+    "dev:tui": "yarn workspace @mm/tui run dev"
+  },
+  "private": true
 }

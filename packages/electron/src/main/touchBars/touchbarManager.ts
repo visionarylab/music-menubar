@@ -1,7 +1,7 @@
-import { mainWindow } from "./index";
-import { ipcMain, TouchBar } from "electron";
-import { ipcTouchbarMessage } from "../ipcMessages/ipcTouchbarMessage";
-import { PlayerTouchBar } from "./touchBars/PlayerTouchBar";
+import { mainWindow } from '../index';
+import { ipcMain, TouchBar } from 'electron';
+import { PlayerTouchBar } from './PlayerTouchBar';
+import { ipcTouchbarMessage } from '../ipc/ipcTouchbarMessage';
 
 export const manageTouchBars = () =>
   mapTouchBar.forEach((value, key) =>

@@ -1,5 +1,5 @@
 {
-  "name": "tui",
+  "name": "@mm/tui",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

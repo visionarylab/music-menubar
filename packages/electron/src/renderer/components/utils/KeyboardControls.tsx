@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { KeyboardEventTypes } from "./KeyboardEventTypes";
+import React, { useEffect } from 'react';
+
+export type KeyboardEventTypes = 'keyup' | 'keydown';
 
 export interface IKeyboardControlsProps {
   mappings: Map<KeyboardEventTypes, Map<string, (event: KeyboardEvent) => any>>; // map both an event type (e.g: keyUp) and a key

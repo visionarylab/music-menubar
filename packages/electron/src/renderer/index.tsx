@@ -24,7 +24,7 @@ function App() {
             <Route path="/spotify/*" element={<Spotify />} />
             <Route path="/soundcloud/*" element={<SoundCloud />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/library" element={<LocalLibrary />} />
+            <Route path="/library/*" element={<LocalLibrary />} />
           </Routes>
         </MemoryRouter>
       </ToastManager>

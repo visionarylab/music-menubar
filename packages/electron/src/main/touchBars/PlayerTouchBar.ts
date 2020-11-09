@@ -1,7 +1,7 @@
-import { getTouchBarIcon, TouchBarIcons } from "./touchBarIcons";
-import { mainWindow } from "./../index";
-import { TouchBar } from "electron";
-import { ipcPlayerMessages } from "../../ipcMessages/ipcPlayerMessages";
+import { getTouchBarIcon, TouchBarIcons } from './touchBarIcons';
+import { mainWindow } from './../index';
+import { TouchBar } from 'electron';
+import { ipcPlayerMessages } from '../ipc/ipcPlayerMessages';
 const { TouchBarButton } = TouchBar;
 
 export const PlayerTouchBar = (isPlaying: boolean) => {
@@ -13,19 +13,19 @@ export const PlayerTouchBar = (isPlaying: boolean) => {
     items: [
       new TouchBarButton({
         icon: getTouchBarIcon(TouchBarIcons.Rewind),
-        iconPosition: "overlay",
+        iconPosition: 'overlay',
         click: () =>
           mainWindow.webContents.send(ipcPlayerMessages.PLAYER_REPLAY),
       }),
       new TouchBarButton({
         icon: getTouchBarIcon(playStatus),
-        iconPosition: "overlay",
+        iconPosition: 'overlay',
         click: () =>
           mainWindow.webContents.send(ipcPlayerMessages.PLAYER_TOGGLE),
       }),
       new TouchBarButton({
         icon: getTouchBarIcon(TouchBarIcons.FastForward),
-        iconPosition: "overlay",
+        iconPosition: 'overlay',
         click: () => mainWindow.webContents.send(ipcPlayerMessages.PLAYER_SKIP),
       }),
     ],

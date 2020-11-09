@@ -7,6 +7,19 @@ type Props = {
   loaded: boolean;
 };
 
+function PlayerContentFull() {
+  return <div></div>;
+}
+
+function PlayerContentMinimized() {}
+
+function PlayerContent({ open }: { open: boolean }) {
+  if (open) {
+    return <PlayerContentFull />;
+  } else {
+  }
+}
+
 // TODO: add howler logic here
 export default function LocalPlayer({ loaded }: Props) {
   const [open, { on, off }] = useToggle(false);
@@ -27,7 +40,7 @@ export default function LocalPlayer({ loaded }: Props) {
             <motion.div
               initial={{ y: 0 }}
               animate={{ translateY: '-100%' }}
-              exit={{ translateY: 0 }}
+              exit={{ translateY: 50 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="relative bg-white overflow-hidden w-full"
             >
